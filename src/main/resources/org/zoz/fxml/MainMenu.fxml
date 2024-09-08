@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zoz.MainMenuController">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zoz.controllers.MainMenuController">
    <center>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #9DA7AB;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="mmButton1" mnemonicParsing="false" prefHeight="50.0" prefWidth="256.0" stylesheets="@../styles/homestyles.css" text="Nieuw dossier" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="mmButton1" mnemonicParsing="false" onAction="#switchScene" prefHeight="50.0" prefWidth="256.0" stylesheets="@../styles/homestyles.css" text="Nieuw dossier" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>

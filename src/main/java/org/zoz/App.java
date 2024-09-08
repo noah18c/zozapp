@@ -3,9 +3,13 @@ package org.zoz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+
+import org.zoz.controllers.MainMenuController;
 
 /**
  * JavaFX App
@@ -19,11 +23,24 @@ public class App extends Application {
        
         this.stage = primaryStage;
 
+        
         MainMenuController mmc = new MainMenuController();
-
-        System.out.println("Lit");
         mmc.setStage(stage);
+
         mmc.render();
+
+
+
+        /* 
+        Parent root = loadFXML("MainMenu");
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        */
+
+        
+       // mmc.setStage(stage);
+        //mmc.render();
 
     }
 
