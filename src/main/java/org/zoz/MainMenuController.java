@@ -1,22 +1,25 @@
 package org.zoz;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class MainMenuController {
+public class MainMenuController{
 
-    @FXML
-    private Button mmButton1;
 
-    @FXML
-    private Button mmButton2;
+    private Stage stage;
 
-    @FXML
-    private Button mmButton3;
+    
+    public void render(){
+        Parent root = App.loadFXML("MainMenu");
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
-    @FXML
-    private Button mmButton4;
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
+
 
 }
-
