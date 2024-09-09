@@ -8,31 +8,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zoz.controllers.MainMenuController">
+<BorderPane stylesheets="@../styles/homestyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zoz.controllers.MainMenuController">
    <center>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #9DA7AB;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="mmButton1" mnemonicParsing="false" onAction="#switchScene" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/homestyles.css" text="Nieuw dossier" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="mmButton1" mnemonicParsing="false" onAction="#switchScene" prefHeight="100.0" prefWidth="400.0" text="Nieuw dossier" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton11" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/homestyles.css" text="Bewerken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="mmButton11" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Bewerken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton111" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/homestyles.css" text="Statistieken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="mmButton111" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Statistieken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton112" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/homestyles.css" text="Help" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="mmButton112" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Help" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton1111" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/homestyles.css" text="Afsluiten" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="mmButton1111" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="400.0" text="Afsluiten" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
@@ -44,7 +44,7 @@
       </VBox>
    </center>
    <top>
-      <BorderPane prefHeight="190.0" prefWidth="400.0" style="-fx-background-color: #9DA7AB;" BorderPane.alignment="CENTER">
+      <BorderPane fx:id="topPane" prefHeight="190.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <center>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>

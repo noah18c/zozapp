@@ -9,3 +9,12 @@
 .button:pressed{
     -fx-background-color:#1a6a8d
 }
+
+.label{
+    -fx-background-color:#ffffff;
+    
+}
+
+#topPane{
+    -fx-background-color:#25A6D9;
+}

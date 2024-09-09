@@ -14,5 +14,9 @@ public class Util {
         Parent root = loader.load();
         return root;
     }
+
+    public static String getStyle(String styleSheet) {
+        return Util.class.getResource("/org/zoz/styles/"+styleSheet+".css").toExternalForm();
+    }
     
 }

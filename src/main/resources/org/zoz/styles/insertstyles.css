@@ -1,0 +1,14 @@
+#titel{
+    -fx-text-fill:white;
+    -fx-font-size:26;
+    -fx-font-weight:bold;
+}
+#topPane{
+    -fx-background-color:#25A6D9;
+}
+.label{
+    -fx-font-size:14;
+}
+.text-field{
+    -fx-font-size:14;
+}
