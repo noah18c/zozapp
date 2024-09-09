@@ -32,7 +32,6 @@ public class App extends Application {
             System.out.println("Cannot load FXML file!");
             return null;
         }
-
     }
 
     public static void main(String[] args) {

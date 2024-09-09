@@ -28,7 +28,7 @@ public class Insert1Controller implements Controller, Initializable {
     private Stage stage;
     private Scene scene;
 
-        @FXML
+    @FXML
     private TextField field1;
 
     @FXML
@@ -101,6 +101,8 @@ public class Insert1Controller implements Controller, Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
 
         field2.setValue(LocalDate.now());
+        field7.setPromptText("dd-mm-jjjj");
+        
 
         countries = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
@@ -114,7 +116,6 @@ public class Insert1Controller implements Controller, Initializable {
             e.printStackTrace();
         }
 
-        //ObservableList<String> observableCountries = FXCollections.observableArrayList(countries);
         field6.getItems().addAll(countries);
         field6.setValue(countries.get(8));
     }

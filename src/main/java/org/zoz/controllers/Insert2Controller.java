@@ -37,13 +37,13 @@ public class Insert2Controller implements Controller, Initializable {
     private TextField field3;
 
     @FXML
-    private ComboBox<?> field4;
+    private ComboBox<String> field4;
 
     @FXML
     private DatePicker field5;
 
     @FXML
-    private ComboBox<?> field6;
+    private ComboBox<String> field6;
 
     @FXML
     private TextField field7;
@@ -92,8 +92,10 @@ public class Insert2Controller implements Controller, Initializable {
     }
 
     @FXML
-    void terug(ActionEvent event) {
-
+    void terug(ActionEvent event) throws IOException {
+        Insert1Controller ic1 = new Insert1Controller();
+        ic1.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
+        ic1.render();
     }
 
 
@@ -126,6 +128,15 @@ public class Insert2Controller implements Controller, Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        field5.setPromptText("dd-mm-jjjj");
+        field8.setPromptText("dd-mm-jjjj");
+        field9.setPromptText("dd-mm-jjjj");
+        field10.setPromptText("dd-mm-jjjj");
+
+        String[] tabh = {"ja", "nee", "idem", "nvt", ""};
+
+        field6.getItems().addAll(tabh);
+        field6.setValue(tabh[4]);
 
         /*
         field2.setValue(LocalDate.now());

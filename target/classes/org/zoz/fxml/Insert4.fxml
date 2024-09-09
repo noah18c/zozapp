@@ -35,7 +35,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Screeningscode::" />
+                  <Label text="Screeningscode:" />
                   <Label layoutX="10.0" layoutY="69.0" text="Zaaknaam:" GridPane.rowIndex="1" />
                   <Label layoutX="10.0" layoutY="113.0" text="A-nummer:" GridPane.rowIndex="2" />
                   <Label layoutX="10.0" layoutY="157.0" text="Dossier bij:" wrapText="true" GridPane.rowIndex="3" />
