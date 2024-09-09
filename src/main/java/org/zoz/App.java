@@ -16,32 +16,11 @@ import org.zoz.controllers.MainMenuController;
  */
 public class App extends Application {
 
-    private Stage stage;
-
     @Override
     public void start(Stage primaryStage) throws IOException {
-       
-        this.stage = primaryStage;
-
-        
         MainMenuController mmc = new MainMenuController();
-        mmc.setStage(stage);
-
+        mmc.setStage(primaryStage);
         mmc.render();
-
-
-
-        /* 
-        Parent root = loadFXML("MainMenu");
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        */
-
-        
-       // mmc.setStage(stage);
-        //mmc.render();
-
     }
 
 

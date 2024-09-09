@@ -8,10 +8,13 @@ import org.zoz.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainMenuController implements Controller{
@@ -25,40 +28,28 @@ public class MainMenuController implements Controller{
     public void render() throws IOException {
         Parent root = Util.loadFMXL("MainMenu");
         this.scene = new Scene(root);
-        this.stage.setScene(scene);
-        this.stage.show();
+
+        Image icon = new Image(getClass().getResourceAsStream("/org/zoz/images/Aruba_Police_Force_logo.png"));
+        
+        // Set the icon for the stage
+        stage.getIcons().add(icon);
+
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     
     @FXML
     public void switchScene(ActionEvent event) throws IOException {
         if(event.getSource().equals(mmButton1)){
-            System.out.println("awesome");
             InsertController ic = new InsertController();
             ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
             ic.render();
-
-            //stage.setScene(scene);
-            //stage.show();
-            
-            //ic.setStage(stage);
-
-            
-
-            /*
-            if(stage.equals(null)){
-
-                System.out.println("alrighty");
-            } else{
-
-                System.out.println("shit");
-            }
-            
-            ic.render();
-            */
         }
     }
 
+    @Override
     public void setStage(Stage stage){
         this.stage = stage;
     }
