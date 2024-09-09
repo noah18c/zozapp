@@ -55,8 +55,8 @@
                   <TextField fx:id="field8" layoutX="216.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="318.0" scaleShape="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                </children>
             </GridPane>
-            <Button fx:id="terugButton" layoutX="41.0" layoutY="549.0" mnemonicParsing="false" onAction="#toMainMenu" text="Terug" />
-            <Button fx:id="nextButton" layoutX="508.0" layoutY="549.0" mnemonicParsing="false" onAction="#toInsert2" text="Verder" />
+            <Button fx:id="terugButton" layoutX="41.0" layoutY="549.0" mnemonicParsing="false" onAction="#terug" text="Terug (hoofdmenu)" />
+            <Button fx:id="nextButton" layoutX="446.0" layoutY="549.0" mnemonicParsing="false" onAction="#verder" text="Verder (verdachte)" />
          </children>
       </AnchorPane>
    </center>

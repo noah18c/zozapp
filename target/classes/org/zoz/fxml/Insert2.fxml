@@ -53,7 +53,7 @@
                   <Label layoutX="10.0" layoutY="289.0" text="Aanhouding datum (dd-mm-yyyy):" wrapText="true" GridPane.rowIndex="7" />
                   <Label layoutX="10.0" layoutY="370.0" text="IVS datum (dd-mm-yyyy):" wrapText="true" GridPane.rowIndex="8" />
                   <Label layoutX="10.0" layoutY="430.0" text="Heengezonden datum (dd-mm-yyyy):" wrapText="true" GridPane.rowIndex="9" />
-                  <TextField fx:id="field1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="321.0" scaleShape="false" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="field1" editable="true" layoutX="216.0" layoutY="174.0" prefHeight="25.0" prefWidth="365.0" GridPane.columnIndex="1" />
                   <TextField fx:id="field2" layoutX="216.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="321.0" scaleShape="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="field3" layoutX="216.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="318.0" scaleShape="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="field4" editable="true" prefHeight="25.0" prefWidth="365.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -65,21 +65,24 @@
                   <DatePicker fx:id="field10" layoutX="216.0" layoutY="425.0" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                </children>
             </GridPane>
-            <Button fx:id="addButton" layoutX="237.0" layoutY="545.0" mnemonicParsing="false" onAction="#toInsert2" text="Toevoegen aan lijst" />
+            <Button fx:id="addButton" layoutX="237.0" layoutY="545.0" mnemonicParsing="false" onAction="#toList" text="Toevoegen aan lijst" />
          </children>
       </AnchorPane>
    </center>
    <left>
-      <VBox alignment="TOP_CENTER" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxWidth="294.0" minWidth="200.0" prefHeight="600.0" prefWidth="294.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Verdachtenlijst:" />
-            <ListView fx:id="lijst" maxWidth="180.0" minWidth="150.0" prefHeight="385.0" prefWidth="150.0" />
+            <ListView fx:id="lijst" maxWidth="261.0" minWidth="150.0" prefHeight="385.0" prefWidth="261.0" />
             <HBox alignment="CENTER" maxWidth="200.0" minWidth="200.0" prefHeight="44.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="plusButton" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="+" textAlignment="CENTER" />
-                  <Button fx:id="minButton" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" textAlignment="CENTER" />
+                  <Button fx:id="minButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="119.0" text="Verwijderen uit lijst" textAlignment="CENTER" />
                </children>
             </HBox>
+            <Button fx:id="opnieuwButton" mnemonicParsing="false" onAction="#removeAll" prefHeight="25.0" prefWidth="106.0" text="Verwijder alles">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin></Button>
          </children>
          <opaqueInsets>
             <Insets />
@@ -90,11 +93,10 @@
       </VBox>
    </left>
    <bottom>
-      <AnchorPane prefHeight="35.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="50.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="nextButton" layoutX="652.0" layoutY="3.0" mnemonicParsing="false" onAction="#toInsert2" text="Opslaan en verder" />
-            <Button fx:id="opnieuwButton" layoutX="365.0" layoutY="4.0" mnemonicParsing="false" onAction="#toInsert2" prefWidth="64.0" text="Opnieuw" />
-            <Button fx:id="terugButton" layoutX="27.0" layoutY="4.0" mnemonicParsing="false" onAction="#toInsert1" text="Terug" />
+            <Button fx:id="nextButton" layoutX="738.0" layoutY="4.0" mnemonicParsing="false" onAction="#verder" text="Verder (voortgang)" />
+            <Button fx:id="terugButton" layoutX="27.0" layoutY="4.0" mnemonicParsing="false" onAction="#terug" text="Terug (aangifte)" />
          </children>
       </AnchorPane>
    </bottom>

@@ -2,32 +2,22 @@ package org.zoz.controllers;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-
-import org.zoz.App;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
 
@@ -77,14 +67,14 @@ public class Insert1Controller implements Controller, Initializable {
     private ArrayList<String> countries;
 
     @FXML
-    void toInsert2(ActionEvent event) throws IOException {
+    void verder(ActionEvent event) throws IOException {
         Insert2Controller ic2 = new Insert2Controller();
         ic2.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
         ic2.render();
     }
 
     @FXML
-    void toMainMenu(ActionEvent event) throws IOException {
+    void terug(ActionEvent event) throws IOException {
         MainMenuController mmc = new MainMenuController();
         mmc.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
         mmc.render();
@@ -96,22 +86,11 @@ public class Insert1Controller implements Controller, Initializable {
 
         this.scene = new Scene(root);
 
-        //String css = Util.getStyle("insertstyles");
-        //scene.getStylesheets().add(css);
-
-        init();
-
         this.stage.setScene(scene);
         stage.centerOnScreen();
         this.stage.show();   
     }
 
-
-    private void init(){
-        
-
-    
-    }
 
     @Override
     public void setStage(Stage stage){

@@ -1,4 +1,5 @@
 package org.zoz.controllers;
+
 import java.io.IOException;
 import java.net.URL;
 import javafx.event.ActionEvent;
@@ -8,45 +9,47 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.util.ResourceBundle;
-public class Insert2Controller implements Controller, Initializable {
+
+public class Insert3Controller implements Controller, Initializable {
 
     private Stage stage;
     private Scene scene;
 
-    @FXML
-    private Button addButton;
 
+
+    
     @FXML
-    private ComboBox<?> field1;
+    private TextField field1;
 
     @FXML
     private DatePicker field10;
 
     @FXML
-    private TextField field2;
+    private DatePicker field11;
 
     @FXML
-    private TextField field3;
+    private DatePicker field2;
 
     @FXML
-    private ComboBox<?> field4;
+    private DatePicker field3;
+
+    @FXML
+    private DatePicker field4;
 
     @FXML
     private DatePicker field5;
 
     @FXML
-    private ComboBox<?> field6;
+    private DatePicker field6;
 
     @FXML
-    private TextField field7;
+    private DatePicker field7;
 
     @FXML
     private DatePicker field8;
@@ -55,16 +58,10 @@ public class Insert2Controller implements Controller, Initializable {
     private DatePicker field9;
 
     @FXML
-    private ListView<?> lijst;
-
-    @FXML
-    private Button minButton;
-
-    @FXML
     private Button nextButton;
 
     @FXML
-    private Button opnieuwButton;
+    private Label status;
 
     @FXML
     private Button terugButton;
@@ -76,41 +73,25 @@ public class Insert2Controller implements Controller, Initializable {
     private BorderPane topPane;
 
     @FXML
-    void removeAll(ActionEvent event) {
-
+    void terug(ActionEvent event) throws IOException {
+        Insert2Controller ic2 = new Insert2Controller();
+        ic2.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
+        ic2.render();
     }
-
-    @FXML
-    void removeItem(ActionEvent event) {
-
-    }
-
-    
-    @FXML
-    void toList(ActionEvent event) {
-
-    }
-
-    @FXML
-    void terug(ActionEvent event) {
-
-    }
-
 
     @FXML
     void verder(ActionEvent event) throws IOException {
-        Insert3Controller ic3 = new Insert3Controller();
-        ic3.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic3.render();
+        Insert4Controller ic4 = new Insert4Controller();
+        ic4.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
+        ic4.render();
     }
-
-
 
     @Override
     public void render() throws IOException{
-        Parent root = Util.loadFMXL("Insert2");
+        Parent root = Util.loadFMXL("Insert3");
 
         this.scene = new Scene(root);
+
         this.stage.setScene(scene);
         stage.centerOnScreen();
         this.stage.show();   
