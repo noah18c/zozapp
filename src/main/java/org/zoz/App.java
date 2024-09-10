@@ -15,9 +15,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        
         MainMenuController mmc = new MainMenuController();
         mmc.setStage(primaryStage);
         mmc.render();
+
     }
 
 

@@ -16,10 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.util.ResourceBundle;
+
+import org.zoz.dossier.Dossier;
 public class Insert2Controller implements Controller, Initializable {
 
     private Stage stage;
     private Scene scene;
+    private Dossier dossier;
 
     @FXML
     private Button addButton;
@@ -75,6 +78,7 @@ public class Insert2Controller implements Controller, Initializable {
     @FXML
     private BorderPane topPane;
 
+
     @FXML
     void removeAll(ActionEvent event) {
 
@@ -93,17 +97,17 @@ public class Insert2Controller implements Controller, Initializable {
 
     @FXML
     void terug(ActionEvent event) throws IOException {
-        Insert1Controller ic1 = new Insert1Controller();
-        ic1.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic1.render();
+        Insert1Controller ic = new Insert1Controller();
+        ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
+        ic.render();
     }
 
 
     @FXML
     void verder(ActionEvent event) throws IOException {
-        Insert3Controller ic3 = new Insert3Controller();
-        ic3.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic3.render();
+        Insert3Controller ic = new Insert3Controller();
+        ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
+        ic.render();
     }
 
 
@@ -157,6 +161,13 @@ public class Insert2Controller implements Controller, Initializable {
         field6.getItems().addAll(countries);
         field6.setValue(countries.get(8));
         */
+    }
+
+    public void setDossier(Dossier dossier){
+        this.dossier = dossier;
+    }
+    public Dossier getDossier(){
+        return this.dossier;
     }
 
 

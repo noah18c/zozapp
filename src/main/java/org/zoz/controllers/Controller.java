@@ -8,5 +8,4 @@ public interface Controller {
 
     public void render() throws IOException;
     public void setStage(Stage stage);
-    
 }

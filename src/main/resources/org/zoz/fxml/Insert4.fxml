@@ -39,7 +39,7 @@
                   <Label layoutX="10.0" layoutY="69.0" text="Zaaknaam:" GridPane.rowIndex="1" />
                   <Label layoutX="10.0" layoutY="113.0" text="A-nummer:" GridPane.rowIndex="2" />
                   <Label layoutX="10.0" layoutY="157.0" text="Dossier bij:" wrapText="true" GridPane.rowIndex="3" />
-                  <Label layoutX="10.0" layoutY="201.0" text="Datum dossier bij (dd-mm-jjjj):" wrapText="true" GridPane.rowIndex="4" />
+                  <Label layoutX="10.0" layoutY="201.0" text="Datum dossier bij:" wrapText="true" GridPane.rowIndex="4" />
                   <Label layoutX="10.0" layoutY="245.0" text="Overige bijzonderheden:" GridPane.rowIndex="5" />
                   <TextField fx:id="field1" GridPane.columnIndex="1" />
                   <TextField fx:id="field2" GridPane.columnIndex="1" GridPane.rowIndex="1" />

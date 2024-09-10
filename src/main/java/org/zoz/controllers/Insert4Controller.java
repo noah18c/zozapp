@@ -18,11 +18,13 @@ import javafx.stage.Stage;
 
 import java.util.ResourceBundle;
 
+import org.zoz.dossier.Dossier;
+
 public class Insert4Controller implements Controller, Initializable {
 
     private Stage stage;
     private Scene scene;
-
+    private Dossier dossier;
 
  @FXML
     private TextField field1;
@@ -105,6 +107,13 @@ public class Insert4Controller implements Controller, Initializable {
         field6.getItems().addAll(countries);
         field6.setValue(countries.get(8));
         */
+    }
+
+    public void setDossier(Dossier dossier){
+        this.dossier = dossier;
+    }
+    public Dossier getDossier(){
+        return this.dossier;
     }
 
 

@@ -33,6 +33,7 @@ public class MainMenuController implements Controller{
 
         stage.setScene(scene);
         stage.centerOnScreen();
+        stage.setTitle("ZOZ - free trial");
         stage.show();
     }
 
@@ -40,7 +41,7 @@ public class MainMenuController implements Controller{
     @FXML
     public void switchScene(ActionEvent event) throws IOException {
         if(event.getSource().equals(mmButton1)){
-            Insert1Controller ic = new Insert1Controller();
+            Insert0Controller ic = new Insert0Controller();
             ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
             ic.render();
         }
