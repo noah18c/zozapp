@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+
 import org.zoz.controllers.MainMenuController;
+import org.zoz.controllers.Util;
 
 /**
  * JavaFX App
@@ -15,10 +18,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        
-        MainMenuController mmc = new MainMenuController();
+        //init stuff
+        Util.loadCountries();
+        Util.loadIC();
+
+        URL url = Util.getPath("MainMenu");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        MainMenuController mmc = loader.getController();
         mmc.setStage(primaryStage);
-        mmc.render();
+        mmc.render(root);
 
     }
 

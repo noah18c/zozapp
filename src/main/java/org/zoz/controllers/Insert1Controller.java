@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,8 +33,6 @@ public class Insert1Controller implements Controller, Initializable {
 
     private Stage stage;
     private Scene scene;
-
-    @FXML
     private Dossier dossier;
 
     @FXML
@@ -78,32 +75,31 @@ public class Insert1Controller implements Controller, Initializable {
 
     @FXML
     void verder(ActionEvent event) throws IOException {
-        saveData();
+        addData();
+        URL url = Util.getPath("Insert2");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        Insert2Controller ic = loader.getController();
 
-        Insert2Controller ic2 = new Insert2Controller();
-        ic2.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic2.render();
-
+        ic.setStage(stage);
+        ic.render(root);
+        ic.setDossier(dossier);
     }
 
     @FXML
     void terug(ActionEvent event) throws IOException {
-        Insert0Controller ic0 = new Insert0Controller();
-        ic0.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic0.render();
-    }
+        URL url = Util.getPath("Insert0");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        Insert0Controller ic = loader.getController();
 
-    @Override
-    public void render() throws IOException{
-        Parent root = Util.loadFMXL("Insert1");
-        this.scene = new Scene(root);
-
-        this.stage.setScene(scene);
-        stage.centerOnScreen();
-        this.stage.show();   
+        ic.setStage(stage);
+        ic.render(root);
     }
 
     public void render(Parent root) throws IOException{
+
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -111,13 +107,25 @@ public class Insert1Controller implements Controller, Initializable {
     }
 
 
-    public void saveData() throws IOException{
+    public void addData() throws IOException{
         dossier.addAangifte();
-        //dossier.addInfo(Util.getDossier().
 
+        if (field7.getValue() == null){
+            field7.setValue(LocalDate.now());
+        }
 
+        dossier.getAangifte().setInfo(field1.getText()+";"+
+                        field2.getValue().toString()+";"+
+                        field3.getText()+";"+
+                        field4.getText()+";"+ 
+                        field5.getText()+";"+
+                        field6.getSelectionModel().getSelectedItem()+";"+
+                        field7.getValue().toString()+";"+
+                        field8.getText());
 
+        System.out.println(dossier.getAangifte().getInfo());
 
+        /*
         File file = new File("src/main/resources/org/zoz/data/aangifte.csv");
         boolean fileExists = file.exists();
         FileWriter writer = new FileWriter(file, true);
@@ -127,13 +135,10 @@ public class Insert1Controller implements Controller, Initializable {
         }
 
 
-        if (field7.getValue() == null){
-            field7.setValue(LocalDate.now());
-        }
 
 
-        writer.write(395+";"+
-                    field1.getText()+";"+
+
+        writer.write(field1.getText()+";"+
                     field2.getValue().toString()+";"+
                     field3.getText()+";"+
                     field4.getText()+";"+ 
@@ -144,6 +149,7 @@ public class Insert1Controller implements Controller, Initializable {
         System.out.println("Data Saved succesfully!");
         
         writer.close();
+        */
     }
 
 
@@ -160,22 +166,9 @@ public class Insert1Controller implements Controller, Initializable {
         field4.setText("");
         field5.setText("");
         
-        
 
-        countries = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
-            String line;
-            // Skip the header
-            br.readLine(); 
-            while ((line = br.readLine()) != null) {
-                countries.add(line.trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        field6.getItems().addAll(countries);
-        field6.setValue(countries.get(8));
+        field6.getItems().addAll(Util.getCountries());
+        field6.setValue(Util.getCountries().get(8));
 
         field7.setPromptText("dd-mm-jjjj");
 

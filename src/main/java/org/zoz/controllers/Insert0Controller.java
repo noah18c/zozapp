@@ -2,6 +2,8 @@ package org.zoz.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +29,7 @@ public class Insert0Controller implements Controller, Initializable {
 
     private Stage stage;
     private Scene scene;
+    private Dossier dossier;
 
     @FXML
     private TextField field1;
@@ -70,34 +73,14 @@ public class Insert0Controller implements Controller, Initializable {
         try{
             saveData();
 
-            //URL url = Util.getPath("Insert1");
-            String fxml = "Insert1";
-
-            Dossier dossier = new Dossier();
-            dossier.addInfo("status", "single");
-            
-
-            //System.out.println(url);
-
-            /*
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/zoz/fxml/"+fxml+".fxml"));
-
+            URL url = Util.getPath("Insert1");
+            FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Insert1Controller ic = loader.getController();
 
-            
-            System.out.println(ic.getDossier().getInfo().get("status"));
-
-            //ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-            //ic.render(root);
-            */
-
-            Insert1Controller ic = new Insert1Controller();
             ic.setDossier(dossier);
-
-            //System.out.println(ic.getDossier().getInfo().get("status"));
             ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-            ic.render();
+            ic.render(root);
         } catch (IOException e){
             Alert a = new Alert(AlertType.ERROR);
             a.setTitle("ERROR!");
@@ -108,30 +91,30 @@ public class Insert0Controller implements Controller, Initializable {
 
     @FXML
     void terug(ActionEvent event) throws IOException {
-        MainMenuController mmc = new MainMenuController();
-        mmc.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        mmc.render();
+        URL url = Util.getPath("MainMenu");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        MainMenuController mmc = loader.getController();
+        mmc.setStage(stage);
+        mmc.render(root);
     }
 
     @Override
-    public void render() throws IOException{
-        Parent root = Util.loadFMXL("Insert0");
-        this.scene = new Scene(root);
-
-        this.stage.setScene(scene);
+    public void render(Parent root) throws IOException{
+        scene = new Scene(root);
+        stage.setScene(scene);
         stage.centerOnScreen();
-        this.stage.show();   
+        stage.show();   
     }
 
 
     public void saveData() throws IOException {
+        dossier = new Dossier();
         Util.setExcel(field1.getText());
 
         double currentDossier = Util.getBottomMostCellInFirstColumn() + 1;
 
-        Util.setDossier((int) currentDossier);
-
-        System.out.println(Util.getDossier());
+        dossier.setId(LocalDate.now().getYear()+"-"+((int) currentDossier));
     }
 
 

@@ -8,16 +8,22 @@ public class Dossier {
 
     private ArrayList<Aangifte> aangiftes;
 
-    private HashMap<String, String> voortgang;
+    private String voortgang;
+
+    private String id;
 
 
     public Dossier(){
         this.aangiftes = new ArrayList<>();
-        this.voortgang = new HashMap<>();
+        this.voortgang = "";
     }
 
     public void addAangifte(){
         this.aangiftes.add(new Aangifte());
+    }
+
+    public Aangifte getAangifte(){
+        return this.aangiftes.get(this.aangiftes.size()-1);
     }
 
     public Aangifte getAangifte(int i){
@@ -28,16 +34,20 @@ public class Dossier {
         this.aangiftes.remove(i);
     }
 
-    public void addInfo(String key, String value){
-        voortgang.put(key, value);
+    public void setInfo(String info){
+        voortgang = info;
     }
 
-    public void removeInfo(String key){
-        voortgang.remove(key);
+    public String getInfo(){
+        return this.voortgang;
     }
 
-    public HashMap<String,String> getInfo(){
-        return voortgang;
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return this.id;
     }
 
 }

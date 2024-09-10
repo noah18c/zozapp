@@ -1,10 +1,13 @@
 package org.zoz.controllers;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,6 +17,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -22,6 +26,8 @@ public class Util {
     private static Workbook excelFile = null;
     private static String filePath;
     private static String dossier;
+    private static ArrayList<String> countries,ic;
+    private static ObservableList<String> lijst;
 
     public static Parent loadFMXL(String fxml) throws IOException{
         URL url = Util.class.getResource("/org/zoz/fxml/"+fxml+".fxml");
@@ -121,5 +127,50 @@ public class Util {
     }
     public static String getDossier(){
         return Util.dossier;
+    }
+
+    public static void loadCountries(){
+        
+        countries = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
+            String line;
+            // Skip the header
+            br.readLine(); 
+            while ((line = br.readLine()) != null) {
+                countries.add(line.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    public static void loadIC(){
+        ic = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/incident_codes.csv"), "UTF-8"))) {
+            String line;
+            // Skip the header
+            br.readLine(); 
+            while ((line = br.readLine()) != null) {
+                ic.add(line.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> getCountries(){
+        return Util.countries;
+    }
+
+    public static ArrayList<String> getIC(){
+        return Util.ic;
+    }
+
+    public static void setTempLijst(ObservableList<String> lijst){
+        Util.lijst = lijst;
+    }
+    public static ObservableList<String> getTempLijst(){
+        return Util.lijst;
     }
 }

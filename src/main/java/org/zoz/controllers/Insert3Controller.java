@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -75,31 +75,42 @@ public class Insert3Controller implements Controller, Initializable {
     private BorderPane topPane;
 
     @FXML
-    void terug(ActionEvent event) throws IOException {
-        Insert2Controller ic2 = new Insert2Controller();
-        ic2.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic2.render();
+    void verder(ActionEvent event) throws IOException {
+        saveData();
+        URL url = Util.getPath("Insert4");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        Insert4Controller ic = loader.getController();
+
+        ic.setStage(stage);
+        ic.render(root);
+        ic.setDossier(dossier);
     }
 
     @FXML
-    void verder(ActionEvent event) throws IOException {
-        Insert4Controller ic4 = new Insert4Controller();
-        ic4.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic4.render();
+    void terug(ActionEvent event) throws IOException {
+        saveData();
+        URL url = Util.getPath("Insert2");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        Insert2Controller ic = loader.getController();
+
+        ic.setStage(stage);
+        ic.render(root);
+        ic.setDossier(dossier);
     }
 
     @Override
-    public void render() throws IOException{
-        Parent root = Util.loadFMXL("Insert3");
-
-        this.scene = new Scene(root);
-
-        this.stage.setScene(scene);
+    public void render(Parent root) throws IOException{
+        scene = new Scene(root);
+        stage.setScene(scene);
         stage.centerOnScreen();
-        this.stage.show();   
+        stage.show();   
     }
 
+    private void saveData(){
 
+    }
 
 
     @Override

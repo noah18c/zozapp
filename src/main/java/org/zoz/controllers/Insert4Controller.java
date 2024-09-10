@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -57,26 +57,28 @@ public class Insert4Controller implements Controller, Initializable {
     private BorderPane topPane;
 
     @FXML
-    void terug(ActionEvent event) throws IOException {
-        Insert3Controller ic3 = new Insert3Controller();
-        ic3.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
-        ic3.render();
+    void verder(ActionEvent event) throws IOException {
+        //saveData();
     }
 
     @FXML
-    void verder(ActionEvent event) {
-        
+    void terug(ActionEvent event) throws IOException {
+        URL url = Util.getPath("Insert3");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        Insert3Controller ic = loader.getController();
+
+        ic.setStage(stage);
+        ic.render(root);
     }
 
 
     @Override
-    public void render() throws IOException{
-        Parent root = Util.loadFMXL("Insert4");
-
-        this.scene = new Scene(root);
-        this.stage.setScene(scene);
+    public void render(Parent root) throws IOException{
+        scene = new Scene(root);
+        stage.setScene(scene);
         stage.centerOnScreen();
-        this.stage.show();   
+        stage.show();   
     }
 
 

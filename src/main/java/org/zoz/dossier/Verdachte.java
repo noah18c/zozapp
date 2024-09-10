@@ -1,21 +1,18 @@
 package org.zoz.dossier;
 
-import java.util.HashMap;
-
 public class Verdachte{
 
-    private HashMap<String, String> infoVerdachte;
+    private String infoVerdachte;
     
     public Verdachte(){
-        this.infoVerdachte = new HashMap<>();
+        this.infoVerdachte = "";
     }
 
-    public void addInfo(String key, String value){
-        infoVerdachte.put(key, value);
+    public void setInfo(String info){
+        this.infoVerdachte = info;
     }
-
-    public void removeInfo(String key){
-        infoVerdachte.remove(key);
+    public String getInfo(){
+        return this.infoVerdachte;
     }
 
 }
