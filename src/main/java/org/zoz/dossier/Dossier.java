@@ -1,21 +1,21 @@
 package org.zoz.dossier;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Dossier {
 
 
     private ArrayList<Aangifte> aangiftes;
 
-    private String voortgang;
+    private String voortgang1, voortgang2;
 
     private String id;
 
 
     public Dossier(){
         this.aangiftes = new ArrayList<>();
-        this.voortgang = "";
+        this.voortgang1 = "";
+        this.voortgang2 = "";
     }
 
     public void addAangifte(){
@@ -34,12 +34,20 @@ public class Dossier {
         this.aangiftes.remove(i);
     }
 
-    public void setInfo(String info){
-        voortgang = info;
+    public void setInfo1(String info){
+        voortgang1 = info;
     }
 
-    public String getInfo(){
-        return this.voortgang;
+    public String getInfo1(){
+        return this.voortgang1;
+    }
+
+    public void setInfo2(String info){
+        voortgang2 = info;
+    }
+
+    public String getInfo2(){
+        return this.voortgang2;
     }
 
     public void setId(String id){

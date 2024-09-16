@@ -2,6 +2,9 @@ package org.zoz.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,6 +92,7 @@ public class Insert3Controller implements Controller, Initializable {
 
     @FXML
     void terug(ActionEvent event) throws IOException {
+        addData();
         saveData();
         URL url = Util.getPath("Insert2");
         FXMLLoader loader = new FXMLLoader(url);
@@ -108,6 +112,25 @@ public class Insert3Controller implements Controller, Initializable {
         stage.show();   
     }
 
+    private void addData(){
+        String[] data = new String[11];
+
+        data[0] = field1.getText();
+        data[1] = getDate(field2);
+        data[2] = getDate(field3);
+        data[3] = getDate(field4);
+        data[4] = getDate(field5);
+        data[5] = getDate(field6);
+        data[6] = getDate(field7);
+        data[7] = getDate(field8);
+        data[8] = getDate(field9);
+        data[9] = getDate(field10);
+        data[10] = getDate(field11);
+
+        String fullData = String.join(";", data);
+        dossier.setInfo1(fullData);
+    }
+
     private void saveData(){
 
     }
@@ -120,6 +143,22 @@ public class Insert3Controller implements Controller, Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
+        
+        
+
+        field1.setPromptText("Naam");
+        field2.setPromptText("dd-mm-jjjj");
+        field3.setPromptText("dd-mm-jjjj");
+        field4.setPromptText("dd-mm-jjjj");
+        field5.setPromptText("dd-mm-jjjj");
+        field6.setPromptText("dd-mm-jjjj");
+        field7.setPromptText("dd-mm-jjjj");
+        field8.setPromptText("dd-mm-jjjj");
+        field9.setPromptText("dd-mm-jjjj");
+        field10.setPromptText("dd-mm-jjjj");
+        field11.setPromptText("dd-mm-jjjj");
+
 
         /*
         field2.setValue(LocalDate.now());
@@ -140,6 +179,14 @@ public class Insert3Controller implements Controller, Initializable {
         field6.getItems().addAll(countries);
         field6.setValue(countries.get(8));
         */
+    }
+
+    private String getDate(DatePicker datePicker){
+        if (datePicker.getValue() == null){
+            return "";
+        } else {
+            return datePicker.getValue().toString();
+        }
     }
 
     public void setDossier(Dossier dossier){

@@ -1,2 +1,14 @@
+org\zoz\controllers\Insert3Controller.class
+org\zoz\controllers\MainMenuController.class
+org\zoz\controllers\Controller.class
+org\zoz\controllers\Insert0Controller.class
 org\zoz\controllers\Util$1.class
+org\zoz\dossier\Dossier.class
 org\zoz\App.class
+org\zoz\controllers\Insert2Controller.class
+org\zoz\SuperApp.class
+org\zoz\controllers\Insert4Controller.class
+org\zoz\controllers\Insert1Controller.class
+org\zoz\dossier\Aangifte.class
+org\zoz\controllers\Util.class
+org\zoz\dossier\Verdachte.class
