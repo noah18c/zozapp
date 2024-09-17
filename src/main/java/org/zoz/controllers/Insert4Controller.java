@@ -58,7 +58,33 @@ public class Insert4Controller implements Controller, Initializable {
 
     @FXML
     void verder(ActionEvent event) throws IOException {
-        //saveData();
+        addData();
+        saveData();
+        URL url = Util.getPath("Popup1");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        PopupController pc = loader.getController();
+
+        pc.renderInsertPopup(root);
+
+        // Retrieve the result from the PopupController
+        String result = pc.getResult();
+
+        // Handle the result based on the button clicked
+        if ("button1".equals(result)) {
+            // Perform action for button1
+            System.out.println("Nieuw aangifte!");
+            saveData();
+        } else if ("button2".equals(result)) {
+            // Perform action for button2
+            System.out.println("Nieuw dossier!");
+            saveData();
+        } else if ("cancel".equals(result)) {
+            // Handle cancel action
+            System.out.println("Action cancelled");
+        }
+
+        
     }
 
     @FXML
@@ -70,6 +96,14 @@ public class Insert4Controller implements Controller, Initializable {
 
         ic.setStage(stage);
         ic.render(root);
+    }
+
+    private void addData(){
+        
+    }
+
+    private void saveData(){
+        
     }
 
 
@@ -90,25 +124,6 @@ public class Insert4Controller implements Controller, Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        /*
-        field2.setValue(LocalDate.now());
-
-        countries = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
-            String line;
-            // Skip the header
-            br.readLine(); 
-            while ((line = br.readLine()) != null) {
-                countries.add(line.trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //ObservableList<String> observableCountries = FXCollections.observableArrayList(countries);
-        field6.getItems().addAll(countries);
-        field6.setValue(countries.get(8));
-        */
     }
 
     public void setDossier(Dossier dossier){

@@ -118,30 +118,6 @@ public class Insert3Controller implements Controller, Initializable {
         this.stage = stage;
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-
-        /*
-        field2.setValue(LocalDate.now());
-
-        countries = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
-            String line;
-            // Skip the header
-            br.readLine(); 
-            while ((line = br.readLine()) != null) {
-                countries.add(line.trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //ObservableList<String> observableCountries = FXCollections.observableArrayList(countries);
-        field6.getItems().addAll(countries);
-        field6.setValue(countries.get(8));
-        */
-    }
-
     public void setDossier(Dossier dossier){
         this.dossier = dossier;
     }
