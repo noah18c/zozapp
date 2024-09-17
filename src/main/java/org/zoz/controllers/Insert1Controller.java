@@ -110,18 +110,20 @@ public class Insert1Controller implements Controller, Initializable {
     public void addData() throws IOException{
         dossier.addAangifte();
 
-        if (field7.getValue() == null){
-            field7.setValue(LocalDate.now());
-        }
+        String[] data = new String[8];
 
-        dossier.getAangifte().setInfo(field1.getText()+";"+
-                        field2.getValue().toString()+";"+
-                        field3.getText()+";"+
-                        field4.getText()+";"+ 
-                        field5.getText()+";"+
-                        field6.getSelectionModel().getSelectedItem()+";"+
-                        field7.getValue().toString()+";"+
-                        field8.getText());
+        data[0] = field1.getText();
+        data[1] = field2.getValue().toString();
+        data[2] = field3.getText();
+        data[3] = field4.getText();
+        data[4] = field5.getText();
+        data[5] = field6.getSelectionModel().getSelectedItem();
+        data[6] = getDate(field7);
+        data[7] = field8.getText();
+
+        String fullData = String.join(";", data);
+
+        dossier.getAangifte().setInfo(fullData);
 
         System.out.println(dossier.getAangifte().getInfo());
 
@@ -151,6 +153,15 @@ public class Insert1Controller implements Controller, Initializable {
         writer.close();
         */
     }
+
+    private String getDate(DatePicker datePicker){
+        if (datePicker.getValue() == null){
+            return "";
+        } else {
+            return datePicker.getValue().toString();
+        }
+    }
+
 
 
     @Override

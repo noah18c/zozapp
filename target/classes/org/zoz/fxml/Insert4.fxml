@@ -49,8 +49,8 @@
                   <TextArea fx:id="field6" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
-            <Button fx:id="terugButton" layoutX="41.0" layoutY="544.0" mnemonicParsing="false" onAction="#terug" text="Terug (verdachte)" />
             <Button fx:id="nextButton" layoutX="494.0" layoutY="544.0" mnemonicParsing="false" onAction="#verder" text="Afronden" />
+            <Button fx:id="terugButton" layoutX="41.0" layoutY="544.0" mnemonicParsing="false" onAction="#terug" text="Terug (verdachte)" />
          </children>
       </AnchorPane>
    </bottom>

@@ -102,33 +102,32 @@ public class Insert2Controller implements Controller, Initializable {
         dossier.getAangifte().addVerdachte();
 
         System.out.println("Hoeveel verdachtes :"+dossier.getAangifte().getVerdachtes().size());
+        
+        String[] data = new String[10];
 
-        if (field5.getValue() == null){
-            field5.setValue(LocalDate.now());
-        }
-        if (field8.getValue() == null){
-            field8.setValue(LocalDate.now());
-        }
-        if (field9.getValue() == null){
-            field9.setValue(LocalDate.now());
-        }
-        if (field10.getValue() == null){
-            field10.setValue(LocalDate.now());
-        }
+        data[0] = field1.getSelectionModel().getSelectedItem();
+        data[1] = field2.getText();
+        data[2] = field3.getText();
+        data[3] = field4.getSelectionModel().getSelectedItem();
+        data[4] = getDate(field5);
+        data[5] = field6.getSelectionModel().getSelectedItem();
+        data[6] = field7.getText();
+        data[7] = getDate(field8);
+        data[8] = getDate(field9);
+        data[9] = getDate(field10);
 
+        String fullData = String.join(";", data);
 
-        dossier.getAangifte().getVerdachte().setInfo(field1.getSelectionModel().getSelectedItem()+";"+
-                                                    field2.getText()+";"+
-                                                    field3.getText()+";"+
-                                                    field4.getSelectionModel().getSelectedItem()+";"+ 
-                                                    field5.getValue().toString()+";"+
-                                                    field6.getSelectionModel().getSelectedItem()+";"+
-                                                    field7.getText()+";"+
-                                                    field8.getValue().toString()+";"+
-                                                    field9.getValue().toString()+";"+
-                                                    field10.getValue().toString());
-
+        dossier.getAangifte().getVerdachte().setInfo(fullData);
         lijst.getItems().add(dossier.getAangifte().getVerdachte().getInfo());
+    }
+
+    private String getDate(DatePicker datePicker){
+        if (datePicker.getValue() == null){
+            return "";
+        } else {
+            return datePicker.getValue().toString();
+        }
     }
 
     @FXML
@@ -154,7 +153,6 @@ public class Insert2Controller implements Controller, Initializable {
 
         ic.setStage(stage);
         ic.render(root);
-        
         ic.setDossier(dossier);
     }
 
@@ -197,26 +195,6 @@ public class Insert2Controller implements Controller, Initializable {
         if (Util.getTempLijst() != null)
             lijst.getItems().setAll(Util.getTempLijst());
         
-
-        /*
-        field2.setValue(LocalDate.now());
-
-        countries = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
-            String line;
-            // Skip the header
-            br.readLine(); 
-            while ((line = br.readLine()) != null) {
-                countries.add(line.trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //ObservableList<String> observableCountries = FXCollections.observableArrayList(countries);
-        field6.getItems().addAll(countries);
-        field6.setValue(countries.get(8));
-        */
     }
 
     public void setDossier(Dossier dossier){
