@@ -3,6 +3,7 @@ package org.zoz.controllers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -22,6 +23,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
 public class Util {
+
+
 
     private static Workbook excelFile = null;
     private static String filePath;
@@ -172,5 +175,22 @@ public class Util {
     }
     public static ObservableList<String> getTempLijst(){
         return Util.lijst;
+    }
+
+    public static void saveToExcel() throws IOException{
+
+
+        Sheet aangifteSheet = excelFile.getSheet("AANGIFTE");
+        Sheet verdachteSheet = excelFile.getSheet("VERDACHTE");
+        Sheet voortgangSheet = excelFile.getSheet("VOORTANG");
+
+        aangifteSheet.createRow(aangifteSheet.getLastRowNum()+1);
+
+
+        aangifteSheet.getRow(aangifteSheet.getLastRowNum()).createCell(0).setCellValue("banaan");
+        
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            excelFile.write(fos);
+        }
     }
 }

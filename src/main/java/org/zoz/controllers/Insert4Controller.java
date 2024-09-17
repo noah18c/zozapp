@@ -78,6 +78,7 @@ public class Insert4Controller implements Controller, Initializable {
         } else if ("button2".equals(result)) {
             // Perform action for button2
             System.out.println("Nieuw dossier!");
+            addData();
             saveData();
         } else if ("cancel".equals(result)) {
             // Handle cancel action
@@ -99,7 +100,17 @@ public class Insert4Controller implements Controller, Initializable {
     }
 
     private void addData(){
-        
+        String[] data = new String[6];
+
+        data[0] = field1.getText();
+        data[1] = field2.getText();
+        data[2] = field3.getText();
+        data[3] = field4.getText();
+        data[4] = getDate(field5);
+        data[5] = field6.getText();
+
+        String fullData = String.join(";", data);
+        dossier.setInfo2(fullData);
     }
 
     private void saveData(){
@@ -131,6 +142,14 @@ public class Insert4Controller implements Controller, Initializable {
     }
     public Dossier getDossier(){
         return this.dossier;
+    }
+
+    private String getDate(DatePicker datePicker){
+        if (datePicker.getValue() == null){
+            return "";
+        } else {
+            return datePicker.getValue().toString();
+        }
     }
 
 

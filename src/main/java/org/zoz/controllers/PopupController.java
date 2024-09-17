@@ -47,7 +47,6 @@ public class PopupController{
     }
 
 
-
     public void renderInsertPopup(Parent root) throws IOException{
         stage = new Stage();
         scene = new Scene(root);
