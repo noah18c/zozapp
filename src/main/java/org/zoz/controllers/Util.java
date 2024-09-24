@@ -29,7 +29,7 @@ public class Util {
 
     private static Workbook excelFile = null;
     private static String filePath;
-    private static String dossier;
+    private static int dossier;
     private static ArrayList<String> countries,ic;
     private static ObservableList<String> lijst;
 
@@ -127,9 +127,9 @@ public class Util {
     }
 
     public static void setDossier(int dossierNum){
-        Util.dossier = LocalDate.now().getYear()+"-"+dossierNum;
+        Util.dossier = dossierNum;
     }
-    public static String getDossier(){
+    public static int getDossier(){
         return Util.dossier;
     }
 
@@ -178,7 +178,7 @@ public class Util {
         return Util.lijst;
     }
 
-    public static void saveToExcel(String data) throws IOException{
+    public static void saveToExcel(int data) throws IOException{
 
 
         Sheet aangifteSheet = excelFile.getSheet("AANGIFTE");
@@ -200,7 +200,7 @@ public class Util {
 
         double currentDossier = Util.getBottomMostCellInFirstColumn() + 1;
 
-        dossier.setId(LocalDate.now().getYear()+"-"+((int) currentDossier));
+        dossier.setId((int) currentDossier);
 
         return dossier;
 

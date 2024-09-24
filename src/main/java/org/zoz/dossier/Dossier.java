@@ -9,7 +9,7 @@ public class Dossier {
 
     private String voortgang1, voortgang2;
 
-    private String id;
+    private int id;
 
 
     public Dossier(){
@@ -50,11 +50,11 @@ public class Dossier {
         return this.voortgang2;
     }
 
-    public void setId(String id){
+    public void setId(int id){
         this.id = id;
     }
 
-    public String getId(){
+    public int getId(){
         return this.id;
     }
 
