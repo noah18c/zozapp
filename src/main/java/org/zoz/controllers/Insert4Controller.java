@@ -75,11 +75,30 @@ public class Insert4Controller implements Controller, Initializable {
             // Perform action for button1
             System.out.println("Nieuw aangifte!");
             saveData();
+
+            url = Util.getPath("Insert1");
+            loader = new FXMLLoader(url);
+            root = loader.load();
+            Insert1Controller ic = loader.getController();
+
+            ic.setStage(stage);
+            ic.render(root);
+            ic.setDossier(dossier);
         } else if ("button2".equals(result)) {
             // Perform action for button2
             System.out.println("Nieuw dossier!");
             addData();
             saveData();
+
+            url = Util.getPath("Insert1");
+            loader = new FXMLLoader(url);
+            root = loader.load();
+            Insert1Controller ic = loader.getController();
+
+            ic.setStage(stage);
+            ic.render(root);
+            ic.setDossier(Util.createNewDossier());
+            Util.saveToExcel(ic.getDossier().getId());
         } else if ("cancel".equals(result)) {
             // Handle cancel action
             System.out.println("Action cancelled");

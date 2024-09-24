@@ -2,7 +2,6 @@ package org.zoz.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -82,7 +81,7 @@ public class Insert0Controller implements Controller, Initializable {
             ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
             ic.render(root);
 
-            Util.saveToExcel();
+            Util.saveToExcel(dossier.getId());
         } catch (IOException e){
             Alert a = new Alert(AlertType.ERROR);
             a.setTitle("ERROR!");
@@ -111,12 +110,8 @@ public class Insert0Controller implements Controller, Initializable {
 
 
     public void saveData() throws IOException {
-        dossier = new Dossier();
         Util.setExcel(field1.getText());
-
-        double currentDossier = Util.getBottomMostCellInFirstColumn() + 1;
-
-        dossier.setId(LocalDate.now().getYear()+"-"+((int) currentDossier));
+        dossier = Util.createNewDossier();
     }
 
 

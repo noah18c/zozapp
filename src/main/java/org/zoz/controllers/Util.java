@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.zoz.dossier.Dossier;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -177,7 +178,7 @@ public class Util {
         return Util.lijst;
     }
 
-    public static void saveToExcel() throws IOException{
+    public static void saveToExcel(String data) throws IOException{
 
 
         Sheet aangifteSheet = excelFile.getSheet("AANGIFTE");
@@ -187,10 +188,21 @@ public class Util {
         aangifteSheet.createRow(aangifteSheet.getLastRowNum()+1);
 
 
-        aangifteSheet.getRow(aangifteSheet.getLastRowNum()).createCell(0).setCellValue("banaan");
+        aangifteSheet.getRow(aangifteSheet.getLastRowNum()).createCell(0).setCellValue(data);
         
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             excelFile.write(fos);
         }
+    }
+
+    public static Dossier createNewDossier() {
+        Dossier dossier = new Dossier();
+
+        double currentDossier = Util.getBottomMostCellInFirstColumn() + 1;
+
+        dossier.setId(LocalDate.now().getYear()+"-"+((int) currentDossier));
+
+        return dossier;
+
     }
 }
