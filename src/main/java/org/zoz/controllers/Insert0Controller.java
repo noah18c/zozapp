@@ -80,8 +80,6 @@ public class Insert0Controller implements Controller, Initializable {
             ic.setDossier(dossier);
             ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
             ic.render(root);
-
-            Util.saveToExcel(dossier.getId());
         } catch (IOException e){
             Alert a = new Alert(AlertType.ERROR);
             a.setTitle("ERROR!");

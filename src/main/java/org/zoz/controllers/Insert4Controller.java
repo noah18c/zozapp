@@ -59,7 +59,6 @@ public class Insert4Controller implements Controller, Initializable {
     @FXML
     void verder(ActionEvent event) throws IOException {
         addData();
-        saveData();
         URL url = Util.getPath("Popup1");
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -97,8 +96,9 @@ public class Insert4Controller implements Controller, Initializable {
 
             ic.setStage(stage);
             ic.render(root);
+
+            
             ic.setDossier(Util.createNewDossier());
-            Util.saveToExcel(ic.getDossier().getId());
         } else if ("cancel".equals(result)) {
             // Handle cancel action
             System.out.println("Action cancelled");
@@ -132,8 +132,8 @@ public class Insert4Controller implements Controller, Initializable {
         dossier.setInfo2(fullData);
     }
 
-    private void saveData(){
-        
+    private void saveData() throws IOException{
+        Util.saveToExcel(dossier);
     }
 
 

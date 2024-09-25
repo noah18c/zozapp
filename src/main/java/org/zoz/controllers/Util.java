@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.zoz.dossier.Dossier;
+import org.zoz.dossier.Verdachte;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -118,6 +119,9 @@ public class Util {
             if (row != null) {
                 Cell cell = row.getCell(0); // Get the first column (index 0)
                 if (cell != null && cell.getCellType() != CellType.BLANK) {
+
+                    //System.out.println(cell.getCellType());
+                    //System.out.println(cell.getStringCellValue());
                     return cell.getNumericCellValue(); // Return the value of the first non-empty cell
                 }
             }
@@ -178,18 +182,55 @@ public class Util {
         return Util.lijst;
     }
 
-    public static void saveToExcel(int data) throws IOException{
+    public static void saveToExcel(Dossier dossier) throws IOException{
 
 
         Sheet aangifteSheet = excelFile.getSheet("AANGIFTE");
         Sheet verdachteSheet = excelFile.getSheet("VERDACHTE");
         Sheet voortgangSheet = excelFile.getSheet("VOORTANG");
 
-        aangifteSheet.createRow(aangifteSheet.getLastRowNum()+1);
+        // write aangifte sheet
+        int lastRow = aangifteSheet.getLastRowNum();
+        aangifteSheet.createRow(lastRow+1);
+        String[] data = dossier.getAangifte().getInfo().split(";");
+        String mutatieNummer = data[0];
+        String aangifteDatum = data[1];
 
+        aangifteSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
+        for (int i = 0; i<data.length; i++){
+            aangifteSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]);
+            System.out.println("cel: "+i);
+        }
 
-        aangifteSheet.getRow(aangifteSheet.getLastRowNum()).createCell(0).setCellValue(data);
+        // write verdachte sheet
         
+
+        // for every verdachte, create a row, use dossiernum that we already have, and copy the other stuff we want
+        for (Verdachte verdachte:dossier.getAangifte().getVerdachtes()){
+            lastRow = verdachteSheet.getLastRowNum();
+            verdachteSheet.createRow(lastRow+1);
+
+            data = verdachte.getInfo().split(";");
+
+
+            verdachteSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
+            verdachteSheet.getRow(lastRow).createCell(1).setCellValue(mutatieNummer);
+            verdachteSheet.getRow(lastRow).createCell(2).setCellValue(aangifteDatum);
+            for(int j = 0; j<data.length;j++){
+                if (j==0){
+                    verdachteSheet.getRow(lastRow).createCell(j+3).setCellValue(data[j]); 
+                } else {
+                    verdachteSheet.getRow(lastRow).createCell(j+6).setCellValue(data[j]); 
+                }
+            }
+
+
+
+
+        }
+
+        
+
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             excelFile.write(fos);
         }
