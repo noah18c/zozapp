@@ -244,11 +244,11 @@ public class Util {
 
         voortgangSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
 
-        int lre = lastRow+=1;
+        int lre = lastRow+1;
 
-        // insert the formula for the rows
         voortgangSheet.getRow(lastRow).createCell(14).setCellFormula("IF(COUNTA($D"+lre+":$M"+lre+")=0,\"!!!\",IFERROR(LOOKUP(2,1/($D"+lre+":$M"+lre+"=MAX($D"+lre+":$M"+lre+")),$D$1:$M$1),\"!!!\"))");
         voortgangSheet.getRow(lastRow).createCell(15).setCellFormula("IF(AND(COUNT($K"+lre+")=1,COUNT($L"+lre+")=0),DAYS360($K"+lre+",TODAY()),IF(AND(COUNT($K"+lre+")=1,COUNT($L"+lre+")=1),$L"+lre+"-$K"+lre+",\"!!!\"))");
+
 
         for (int i = 0; i<data.length;i++){
 
