@@ -79,6 +79,7 @@ public class Insert3Controller implements Controller, Initializable {
 
     @FXML
     void verder(ActionEvent event) throws IOException {
+        addData();
         saveData();
         URL url = Util.getPath("Insert4");
         FXMLLoader loader = new FXMLLoader(url);
@@ -180,6 +181,7 @@ public class Insert3Controller implements Controller, Initializable {
         field6.setValue(countries.get(8));
         */
     }
+
 
     private String getDate(DatePicker datePicker){
         if (datePicker.getValue() == null){

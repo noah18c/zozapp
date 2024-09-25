@@ -86,7 +86,6 @@ public class Insert4Controller implements Controller, Initializable {
         } else if ("button2".equals(result)) {
             // Perform action for button2
             System.out.println("Nieuw dossier!");
-            addData();
             saveData();
 
             url = Util.getPath("Insert1");

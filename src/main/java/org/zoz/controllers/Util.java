@@ -7,12 +7,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -184,31 +189,33 @@ public class Util {
 
     public static void saveToExcel(Dossier dossier) throws IOException{
 
-
+        // load all sheets
         Sheet aangifteSheet = excelFile.getSheet("AANGIFTE");
         Sheet verdachteSheet = excelFile.getSheet("VERDACHTE");
-        Sheet voortgangSheet = excelFile.getSheet("VOORTANG");
+        Sheet voortgangSheet = excelFile.getSheet("VOORTGANG");
 
-        // write aangifte sheet
-        int lastRow = aangifteSheet.getLastRowNum();
-        aangifteSheet.createRow(lastRow+1);
+        // load aangiftesheet data
+        int lastRow = aangifteSheet.getLastRowNum()+1;
+        aangifteSheet.createRow(lastRow);
         String[] data = dossier.getAangifte().getInfo().split(";");
         String mutatieNummer = data[0];
         String aangifteDatum = data[1];
 
+
+        // set first cell as dossiernum
         aangifteSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
+
+        // iterate over all data, create a cell, insert it into the cell
         for (int i = 0; i<data.length; i++){
             aangifteSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]);
             System.out.println("cel: "+i);
         }
-
-        // write verdachte sheet
         
 
         // for every verdachte, create a row, use dossiernum that we already have, and copy the other stuff we want
         for (Verdachte verdachte:dossier.getAangifte().getVerdachtes()){
-            lastRow = verdachteSheet.getLastRowNum();
-            verdachteSheet.createRow(lastRow+1);
+            lastRow = verdachteSheet.getLastRowNum()+1;
+            verdachteSheet.createRow(lastRow);
 
             data = verdachte.getInfo().split(";");
 
@@ -220,15 +227,58 @@ public class Util {
                 if (j==0){
                     verdachteSheet.getRow(lastRow).createCell(j+3).setCellValue(data[j]); 
                 } else {
-                    verdachteSheet.getRow(lastRow).createCell(j+6).setCellValue(data[j]); 
+                    verdachteSheet.getRow(lastRow).createCell(j+5).setCellValue(data[j]); 
                 }
             }
-
-
-
-
         }
 
+        // write voortgang 1 and 2
+        lastRow = voortgangSheet.getLastRowNum()+1;
+        voortgangSheet.createRow(lastRow);
+
+        String dataString = dossier.getInfo1() +";"+ dossier.getInfo2();
+
+        data = dataString.split(";");
+
+        System.out.println(dataString);
+
+        voortgangSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
+
+        int lre = lastRow+=1;
+
+        // insert the formula for the rows
+        voortgangSheet.getRow(lastRow).createCell(14).setCellFormula("IF(COUNTA($D"+lre+":$M"+lre+")=0,\"!!!\",IFERROR(LOOKUP(2,1/($D"+lre+":$M"+lre+"=MAX($D"+lre+":$M"+lre+")),$D$1:$M$1),\"!!!\"))");
+        voortgangSheet.getRow(lastRow).createCell(15).setCellFormula("IF(AND(COUNT($K"+lre+")=1,COUNT($L"+lre+")=0),DAYS360($K"+lre+",TODAY()),IF(AND(COUNT($K"+lre+")=1,COUNT($L"+lre+")=1),$L"+lre+"-$K"+lre+",\"!!!\"))");
+
+        for (int i = 0; i<data.length;i++){
+
+            if(i>0 && i < 11 && data[i] != ""){
+                System.out.println("string date: "+data[i]);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                try{
+                    Date date = dateFormat.parse(data[i]);
+                    System.out.println("current date: "+date.toString());
+                    voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(date);
+
+                    // Optionally, you can create and set a date format (recommended)
+                    CellStyle cellStyle = voortgangSheet.getWorkbook().createCellStyle();
+                    CreationHelper createHelper = voortgangSheet.getWorkbook().getCreationHelper();
+                    cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
+                    voortgangSheet.getRow(lastRow).getCell(i+1).setCellStyle(cellStyle);
+                } catch (ParseException e){
+                    System.out.println("There is an error converting the string to a date");
+                    e.printStackTrace();
+                }
+            } else {
+                if (i<14){
+                    voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]); 
+                } else {
+                    voortgangSheet.getRow(lastRow).createCell(i+4).setCellValue(data[i]); 
+                }
+            }
+            
+
+        } 
         
 
         try (FileOutputStream fos = new FileOutputStream(filePath)) {

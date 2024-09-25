@@ -9,6 +9,9 @@ public class Dossier {
 
     private String voortgang1, voortgang2;
 
+    private String status;
+    private int behandelingsTermijn;
+
     private int id;
 
 
