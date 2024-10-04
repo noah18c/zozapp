@@ -12,37 +12,37 @@
    <center>
       <VBox alignment="TOP_CENTER" style="-fx-background-color: #9DA7AB;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="mmButton1" mnemonicParsing="false" onAction="#switchScene" prefHeight="80.0" prefWidth="400.0" text="Nieuw dossier" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="ndossier" mnemonicParsing="false" onAction="#switchScene" prefHeight="80.0" prefWidth="400.0" text="Nieuw dossier" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton11" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Bewerken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="bewerken" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Bewerken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton12" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="80.0" prefWidth="400.0" text="Zoeken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="zoeken" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="80.0" prefWidth="400.0" text="Zoeken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton111" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Statistieken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="statistieken" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Statistieken" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton112" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Help" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="help" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Help" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton1121" layoutX="10.0" layoutY="310.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Credits" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="credits" layoutX="10.0" layoutY="310.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Credits" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="mmButton1111" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="400.0" text="Afsluiten" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="afsluiten" layoutX="10.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="80.0" prefWidth="400.0" text="Afsluiten" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>

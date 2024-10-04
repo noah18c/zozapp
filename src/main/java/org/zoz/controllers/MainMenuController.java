@@ -10,11 +10,33 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainMenuController implements Controller{
     @FXML
-    private Button mmButton1;
+    private Button afsluiten;
+
+    @FXML
+    private Button bewerken;
+
+    @FXML
+    private Button credits;
+
+    @FXML
+    private Button ndossier;
+
+    @FXML
+    private Button help;
+
+    @FXML
+    private Button statistieken;
+
+    @FXML
+    private BorderPane topPane;
+
+    @FXML
+    private Button zoeken;
 
     private Stage stage;
     private Scene scene;
@@ -35,12 +57,17 @@ public class MainMenuController implements Controller{
         stage.centerOnScreen();
         stage.setTitle("ZOZ - free trial");
         stage.show();
+
+        stage.setOnCloseRequest(e->{
+            
+        });
     }
+    
 
     
     @FXML
     public void switchScene(ActionEvent event) throws IOException {
-        if(event.getSource().equals(mmButton1)){
+        if(event.getSource().equals(ndossier)){
             URL url = Util.getPath("Insert0");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
@@ -49,6 +76,8 @@ public class MainMenuController implements Controller{
             //ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
             ic.setStage(stage);
             ic.render(root);
+        } else if(event.getSource().equals(afsluiten)){
+            stage.close();
         }
     }
 

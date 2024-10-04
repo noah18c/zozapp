@@ -26,6 +26,9 @@ public class PopupController{
     private Button button3;
 
     @FXML
+    private Button button4;
+
+    @FXML
     private Label promptText;
 
     private String result;
@@ -38,6 +41,8 @@ public class PopupController{
             result = "button2";
         } else if (event.getSource() == button3) {
             result = "cancel";
+        } else if (event.getSource() == button4) {
+            result = "home";
         }
         stage.close();
     }
@@ -56,6 +61,8 @@ public class PopupController{
         button1.setText("Nieuwe Aangifte");
         button2.setText("Nieuw Dossier");
         button3.setText("Annuleren");
+        button4.setText("Hoofdmenu");
+        button3.isDefaultButton();
 
         promptText.setText("Hoe wilt u verdergaan?");
 

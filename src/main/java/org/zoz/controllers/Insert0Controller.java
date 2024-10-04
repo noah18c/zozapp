@@ -2,6 +2,7 @@ package org.zoz.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.io.FileOutputStream;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -28,7 +30,7 @@ public class Insert0Controller implements Controller, Initializable {
 
     private Stage stage;
     private Scene scene;
-    private Dossier dossier;
+    private Dossier dossier = null;
 
     @FXML
     private TextField field1;
@@ -64,11 +66,28 @@ public class Insert0Controller implements Controller, Initializable {
         } else {
             field1.setText("No file selected");
         }
+
+        
     }
 
 
     @FXML
     void verder(ActionEvent event) {
+
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Waarschuwing!");
+        alert.setHeaderText("Sluit het gekozen Excel-bestand!");
+        alert.setContentText("Er kunnen fouten met het overschrijven ontstaan indien het bestand geopend is!");
+
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(ButtonType.OK);
+    
+        //Deactivate Defaultbehavior for yes-Button:
+        Button okButton = (Button) alert.getDialogPane().lookupButton( ButtonType.OK );
+        okButton.setText("Ok");
+        okButton.setDefaultButton( true );
+        alert.showAndWait();
+
         try{
             saveData();
 
@@ -80,12 +99,15 @@ public class Insert0Controller implements Controller, Initializable {
             ic.setDossier(dossier);
             ic.setStage((Stage)((Node)event.getSource()).getScene().getWindow());
             ic.render(root);
+            ic.newAangifte(true);
         } catch (IOException e){
             Alert a = new Alert(AlertType.ERROR);
             a.setTitle("ERROR!");
             a.setContentText("Ongeldig bestand!");
             a.showAndWait();
+            e.printStackTrace();
         }
+        
     }
 
     @FXML
@@ -104,18 +126,23 @@ public class Insert0Controller implements Controller, Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();   
+        stage.setOnCloseRequest(e->{
+            
+        });
     }
 
 
     public void saveData() throws IOException {
         Util.setExcel(field1.getText());
-        dossier = Util.createNewDossier();
+        if(dossier == null)
+            dossier = Util.createNewDossier();
     }
 
 
     @Override
     public void setStage(Stage stage){
         this.stage = stage;
+        
     }
 
     @Override

@@ -1,120 +1,120 @@
-incident_codes;
-1 Wv;Verboden wapen bezit
-2 LVM;Kweekverbod
-2 LVM;Kweekverbod-POGING
-2 LVM;Kweekverbod-VOORBEREIDING
-2:132;Ambtsdwang
-2:133;Wederspanning
-2:134;Ambtsdwang/wederspanning m.l.l.
-2:135;Ambtsdwang/wederspanning i.v.
-2:137;Belemmering
-2:140;Samenscholing
-2:142;Valse aangifte
-2:142;Valse aangifte-POGING
-2:146;Zelfbevrijding
-2:146;Zelfbevrijding-POGING
-2:165;Meineed
-2:184;Valsheid in geschrifte
-2:185;Valsheid in geschrifte o.v.o.
-2:186;Valse gegevens verstrekken
-2:223;Smaad
-2:224;Laster
-2:226;Belediging
-2:227;Belediging ambtenaar
-2:249;Vrijheidsberoving
-2:249;Vrijheidsberoving-POGING
-2:249;Vrijheidsberoving-VOORBEREIDING
-2:250;Gijzeling
-2:250;Gijzeling-POGING
-2:250;Gijzeling-VOORBEREIDING
-2:251;Terroristische gijzeling
-2:251;Terroristische gijzeling-POGING
-2:251;Terroristische gijzeling-VOORBEREIDING
-2:255;Bedreiging
-2:257;Stalking
-2:259;Doodslag
-2:259;Doodslag-POGING
-2:260;Doodslag o.v.o.
-2:260;Doodslag o.v.o.-POGING
-2:262;Moord
-2:262;Moord-POGING
-2:262;Moord-VOORBEREIDING
-2:264;Kinderdoodslag
-2:264;Kinderdoodslag-POGING
-2:265;Kindermoord
-2:265;Kindermoord-POGING
-2:265;Kindermoord-VOORBEREIDING
-2:267;Euthanasie
-2:267;Euthanasie-POGING
-2:267;Euthanasie-VOORBEREIDING
-2:268;Zelfmoord faciliteren
-2:268;Zelfmoord faciliteren-POGING
-2:273 lid 1;Eenv. mishandeling
-2:273 lid 2;Mish. met een wapen
-2:273 lid 2;Mish. met een wapen-POGING
-2:273 lid 2;Mish. met een wapen-VOORBEREIDING
-2:273 lid 3;Mish. met zwaar lich. letsel
-2:273 lid 4;Mish. met de dood ten gevolge
-2:275;Zware mishandeling
-2:275;Zware mishandeling-POGING
-2:276;Zware mishandeling m.v.r.
-2:276;Zware mishandeling m.v.r.-POGING
-2:276;Zware mishandeling m.v.r.-VOORBEREIDING
-2:288;Diefstal
-2:288;Diefstal-POGING
-2:289;Diefstal o.v.o.
-2:289;Diefstal o.v.o.-POGING
-2:289;Diefstal o.v.o.-VOORBEREIDING
-2:291;Diefstal met geweld (beroving)
-2:291;Diefstal met geweld (beroving)-POGING
-2:291;Diefstal met geweld (beroving)-VOORBEREIDING
-2:294;Afpersing (chantage)
-2:294;Afpersing (chantage)-POGING
-2:294;Afpersing (chantage)-VOORBEREIDING
-2:295;Afdreiging
-2:295;Afdreiging-POGING
-2:298;Verduistering
-2:298;Verduistering-POGING
-2:299;Verduistering in diensbetrekking
-2:299;Verduistering in diensbetrekking-POGING
-2:305;Oplichting
-2:305;Oplichting-POGING
-2:307 sub a;Vervalsen
-2:307 sub a;Vervalsen-POGING
-2:307 sub b;Vervalste goederen handelen
-2:307 sub b;Vervalste goederen handelen-POGING
-2:334;Vernieling
-2:334;Vernieling-POGING
-2:370;Sky/Hi jacking
-2:370;Sky/Hi jacking-POGING
-2:370;Sky/Hi jacking-VOORBEREIDING
-2:397;Heling
-2:398;Heling uit gewoonte
-2:399;Schuldheling
-2:404;Witwassen
-2:404;Witwassen-POGING
-2:404;Witwassen-VOORBEREIDING
-2:405;Witwassen uit gewoonte
-2:405;Witwassen uit gewoonte-POGING
-2:405;Witwassen uit gewoonte-VOORBEREIDING
-2:406;Schuldwitwassen
-2:406;Schuldwitwassen-POGING
-2:49;Opruiing
-2:49;Opruiing-POGING
-2:69 lid 1;Hacking
-2:69 lid 1;Hacking-POGING
-2:69 lid 2;Hacking o.v.o.
-2:69 lid 2;Hacking o.v.o.-POGING
-2:69 lid 3;Hacking openb. telecom 
-2:69 lid 3;Hacking openb. telecom -POGING
-2:82;Openlijk geweldpleging
-2:98;Brandstichting
-2:98;Brandstichting-POGING
-2:98;Brandstichting-VOORBEREIDING
-3 LVM;Algemeen verbod LVM
-3 LVM;Algemeen verbod LVM-POGING
-3 LVM;Algemeen verbod LVM-VOORBEREIDING
-3 Vv;Beschikken over een vuurwapen
-4 LVM;Algemeen verbod LVM
-4 LVM;Algemeen verbod LVM-POGING
-4 LVM;Algemeen verbod LVM-VOORBEREIDING
+incident_codes | 
+1 Wv | Verboden wapen bezit
+2 LVM | Kweekverbod
+2 LVM | Kweekverbod-POGING
+2 LVM | Kweekverbod-VOORBEREIDING
+2:132 | Ambtsdwang
+2:133 | Wederspanning
+2:134 | Ambtsdwang/wederspanning m.l.l.
+2:135 | Ambtsdwang/wederspanning i.v.
+2:137 | Belemmering
+2:140 | Samenscholing
+2:142 | Valse aangifte
+2:142 | Valse aangifte-POGING
+2:146 | Zelfbevrijding
+2:146 | Zelfbevrijding-POGING
+2:165 | Meineed
+2:184 | Valsheid in geschrifte
+2:185 | Valsheid in geschrifte o.v.o.
+2:186 | Valse gegevens verstrekken
+2:223 | Smaad
+2:224 | Laster
+2:226 | Belediging
+2:227 | Belediging ambtenaar
+2:249 | Vrijheidsberoving
+2:249 | Vrijheidsberoving-POGING
+2:249 | Vrijheidsberoving-VOORBEREIDING
+2:250 | Gijzeling
+2:250 | Gijzeling-POGING
+2:250 | Gijzeling-VOORBEREIDING
+2:251 | Terroristische gijzeling
+2:251 | Terroristische gijzeling-POGING
+2:251 | Terroristische gijzeling-VOORBEREIDING
+2:255 | Bedreiging
+2:257 | Stalking
+2:259 | Doodslag
+2:259 | Doodslag-POGING
+2:260 | Doodslag o.v.o.
+2:260 | Doodslag o.v.o.-POGING
+2:262 | Moord
+2:262 | Moord-POGING
+2:262 | Moord-VOORBEREIDING
+2:264 | Kinderdoodslag
+2:264 | Kinderdoodslag-POGING
+2:265 | Kindermoord
+2:265 | Kindermoord-POGING
+2:265 | Kindermoord-VOORBEREIDING
+2:267 | Euthanasie
+2:267 | Euthanasie-POGING
+2:267 | Euthanasie-VOORBEREIDING
+2:268 | Zelfmoord faciliteren
+2:268 | Zelfmoord faciliteren-POGING
+2:273 lid 1 | Eenv. mishandeling
+2:273 lid 2 | Mish. met een wapen
+2:273 lid 2 | Mish. met een wapen-POGING
+2:273 lid 2 | Mish. met een wapen-VOORBEREIDING
+2:273 lid 3 | Mish. met zwaar lich. letsel
+2:273 lid 4 | Mish. met de dood ten gevolge
+2:275 | Zware mishandeling
+2:275 | Zware mishandeling-POGING
+2:276 | Zware mishandeling m.v.r.
+2:276 | Zware mishandeling m.v.r.-POGING
+2:276 | Zware mishandeling m.v.r.-VOORBEREIDING
+2:288 | Diefstal
+2:288 | Diefstal-POGING
+2:289 | Diefstal o.v.o.
+2:289 | Diefstal o.v.o.-POGING
+2:289 | Diefstal o.v.o.-VOORBEREIDING
+2:291 | Diefstal met geweld (beroving)
+2:291 | Diefstal met geweld (beroving)-POGING
+2:291 | Diefstal met geweld (beroving)-VOORBEREIDING
+2:294 | Afpersing (chantage)
+2:294 | Afpersing (chantage)-POGING
+2:294 | Afpersing (chantage)-VOORBEREIDING
+2:295 | Afdreiging
+2:295 | Afdreiging-POGING
+2:298 | Verduistering
+2:298 | Verduistering-POGING
+2:299 | Verduistering in diensbetrekking
+2:299 | Verduistering in diensbetrekking-POGING
+2:305 | Oplichting
+2:305 | Oplichting-POGING
+2:307 sub a | Vervalsen
+2:307 sub a | Vervalsen-POGING
+2:307 sub b | Vervalste goederen handelen
+2:307 sub b | Vervalste goederen handelen-POGING
+2:334 | Vernieling
+2:334 | Vernieling-POGING
+2:370 | Sky/Hi jacking
+2:370 | Sky/Hi jacking-POGING
+2:370 | Sky/Hi jacking-VOORBEREIDING
+2:397 | Heling
+2:398 | Heling uit gewoonte
+2:399 | Schuldheling
+2:404 | Witwassen
+2:404 | Witwassen-POGING
+2:404 | Witwassen-VOORBEREIDING
+2:405 | Witwassen uit gewoonte
+2:405 | Witwassen uit gewoonte-POGING
+2:405 | Witwassen uit gewoonte-VOORBEREIDING
+2:406 | Schuldwitwassen
+2:406 | Schuldwitwassen-POGING
+2:49 | Opruiing
+2:49 | Opruiing-POGING
+2:69 lid 1 | Hacking
+2:69 lid 1 | Hacking-POGING
+2:69 lid 2 | Hacking o.v.o.
+2:69 lid 2 | Hacking o.v.o.-POGING
+2:69 lid 3 | Hacking openb. telecom 
+2:69 lid 3 | Hacking openb. telecom -POGING
+2:82 | Openlijk geweldpleging
+2:98 | Brandstichting
+2:98 | Brandstichting-POGING
+2:98 | Brandstichting-VOORBEREIDING
+3 LVM | Algemeen verbod LVM
+3 LVM | Algemeen verbod LVM-POGING
+3 LVM | Algemeen verbod LVM-VOORBEREIDING
+3 Vv | Beschikken over een vuurwapen
+4 LVM | Algemeen verbod LVM
+4 LVM | Algemeen verbod LVM-POGING
+4 LVM | Algemeen verbod LVM-VOORBEREIDING

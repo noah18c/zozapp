@@ -25,6 +25,10 @@ public class Dossier {
         this.aangiftes.add(new Aangifte());
     }
 
+    public ArrayList<Aangifte> getAangiftes(){
+        return this.aangiftes;
+    }
+
     public Aangifte getAangifte(){
         return this.aangiftes.get(this.aangiftes.size()-1);
     }

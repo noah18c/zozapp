@@ -12,12 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane stylesheets="@../styles/insertstyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zoz.controllers.Insert4Controller">
-   <top>
-      <BorderPane fx:id="topPane" prefHeight="82.0" prefWidth="256.0" BorderPane.alignment="CENTER">
-         <center>
-            <Label fx:id="titel" text="Invoer voortgang #2" BorderPane.alignment="CENTER" />
-         </center></BorderPane>
-   </top>
    <bottom>
       <AnchorPane prefHeight="602.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -54,4 +48,12 @@
          </children>
       </AnchorPane>
    </bottom>
+   <top>
+      <AnchorPane fx:id="topPane" prefHeight="80.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="titel" layoutX="174.0" layoutY="22.0" text="Invoer voortgang #2" />
+            <Button fx:id="homeButton" layoutX="14.0" layoutY="28.0" mnemonicParsing="false" onAction="#goHome" text="Hoofdmenu" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.poi.ss.usermodel.Sheet;
@@ -160,7 +161,7 @@ public class Util {
     
     public static void loadIC(){
         ic = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/incident_codes.csv"), "UTF-8"))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/incidentcodes_2024.csv"), "UTF-8"))) {
             String line;
             // Skip the header
             br.readLine(); 
@@ -187,7 +188,21 @@ public class Util {
         return Util.lijst;
     }
 
+    private static boolean isFileLocked(String path) {
+        File file = new File(path);
+        try (FileOutputStream fos = new FileOutputStream(file, true)) {
+            // Attempting to open a file output stream will fail if the file is locked
+            return false; // File is not locked
+        } catch (IOException e) {
+            return true; // File is locked
+        }
+    }
+    
+
     public static void saveToExcel(Dossier dossier) throws IOException{
+        if (isFileLocked(filePath)) {
+            throw new IOException("The file is currently open by another application. Please close it and try again.");
+        }
 
         // load all sheets
         Sheet aangifteSheet = excelFile.getSheet("AANGIFTE");
@@ -207,7 +222,11 @@ public class Util {
 
         // iterate over all data, create a cell, insert it into the cell
         for (int i = 0; i<data.length; i++){
-            aangifteSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]);
+            if(i == 1){
+                insertDate(aangifteSheet, data[i], i+1, lastRow);
+            } else {
+                aangifteSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]);
+            }
             System.out.println("cel: "+i);
         }
         
@@ -222,12 +241,12 @@ public class Util {
 
             verdachteSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
             verdachteSheet.getRow(lastRow).createCell(1).setCellValue(mutatieNummer);
-            verdachteSheet.getRow(lastRow).createCell(2).setCellValue(aangifteDatum);
+            insertDate(verdachteSheet, aangifteDatum, 2, lastRow);
             for(int j = 0; j<data.length;j++){
-                if (j==0){
-                    verdachteSheet.getRow(lastRow).createCell(j+3).setCellValue(data[j]); 
+                if (j==6){
+                    insertDate(verdachteSheet, data[j], j+3, lastRow);
                 } else {
-                    verdachteSheet.getRow(lastRow).createCell(j+5).setCellValue(data[j]); 
+                    verdachteSheet.getRow(lastRow).createCell(j+3).setCellValue(data[j]); 
                 }
             }
         }
@@ -250,31 +269,21 @@ public class Util {
         voortgangSheet.getRow(lastRow).createCell(15).setCellFormula("IF(AND(COUNT($K"+lre+")=1,COUNT($L"+lre+")=0),DAYS360($K"+lre+",TODAY()),IF(AND(COUNT($K"+lre+")=1,COUNT($L"+lre+")=1),$L"+lre+"-$K"+lre+",\"!!!\"))");
 
 
+        System.out.println(Arrays.toString(data));
         for (int i = 0; i<data.length;i++){
 
-            if(i>0 && i < 11 && data[i] != ""){
+            // for voortgang #1
+            if(i < 12){
                 System.out.println("string date: "+data[i]);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try{
-                    Date date = dateFormat.parse(data[i]);
-                    System.out.println("current date: "+date.toString());
-                    voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(date);
-
-                    // Optionally, you can create and set a date format (recommended)
-                    CellStyle cellStyle = voortgangSheet.getWorkbook().createCellStyle();
-                    CreationHelper createHelper = voortgangSheet.getWorkbook().getCreationHelper();
-                    cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
-                    voortgangSheet.getRow(lastRow).getCell(i+1).setCellStyle(cellStyle);
-                } catch (ParseException e){
-                    System.out.println("There is an error converting the string to a date");
-                    e.printStackTrace();
-                }
+                insertDate(voortgangSheet, data[i], i+1, lastRow);
+            } else if(i<13) {
+                voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]); 
+            } else if(i == 16){
+                System.out.println("string date: "+data[i]);
+                insertDate(voortgangSheet, data[i], i+3, lastRow);   
             } else {
-                if (i<14){
-                    voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]); 
-                } else {
-                    voortgangSheet.getRow(lastRow).createCell(i+4).setCellValue(data[i]); 
-                }
+                // rest van voortgang #2
+                voortgangSheet.getRow(lastRow).createCell(i+3).setCellValue(data[i]); 
             }
             
 
@@ -283,6 +292,26 @@ public class Util {
 
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             excelFile.write(fos);
+        }  catch (IOException e) {
+            throw new IOException("Error writing to Excel file. Ensure the file is not open.", e);
+        }
+    }
+
+    private static void insertDate(Sheet sheet, String dataString, int column, int row){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            Date date = dateFormat.parse(dataString);
+            System.out.println("current date: "+date.toString());
+            sheet.getRow(row).createCell(column).setCellValue(date);
+
+            // Optionally, you can create and set a date format (recommended)
+            CellStyle cellStyle = sheet.getWorkbook().createCellStyle();
+            CreationHelper createHelper = sheet.getWorkbook().getCreationHelper();
+            cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
+            sheet.getRow(row).getCell(column).setCellStyle(cellStyle);
+        } catch (ParseException e){
+            System.out.println("There is an error converting the string to a date");
+            //e.printStackTrace();
         }
     }
 

@@ -13,10 +13,12 @@
 
 <BorderPane stylesheets="@../styles/insertstyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zoz.controllers.Insert1Controller">
    <top>
-      <BorderPane fx:id="topPane" prefHeight="82.0" prefWidth="256.0" BorderPane.alignment="CENTER">
-         <center>
-            <Label fx:id="titel" text="Invoer aangifte" BorderPane.alignment="CENTER" />
-         </center></BorderPane>
+      <AnchorPane fx:id="topPane" prefHeight="80.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="titel" layoutX="207.0" layoutY="21.0" text="Invoer aangifte" />
+            <Button fx:id="homeButton" layoutX="14.0" layoutY="28.0" mnemonicParsing="false" onAction="#goHome" text="Hoofdmenu" />
+         </children>
+      </AnchorPane>
    </top>
    <center>
       <AnchorPane prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">

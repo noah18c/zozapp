@@ -11,11 +11,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.util.ResourceBundle;
@@ -69,21 +73,60 @@ public class Insert1Controller implements Controller, Initializable {
     private Label titel;
 
     @FXML
-    private BorderPane topPane;
+    private AnchorPane topPane;
 
-    private ArrayList<String> countries;
+    private boolean newAangifte;
+
+    @FXML
+    private Button homeButton;
+
+    @FXML
+    void goHome(ActionEvent event) throws IOException {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Hoofdmenu");
+        alert.setHeaderText("U staat op het punt om naar het menu te gaan!");
+        alert.setContentText("U zult ingevoerde gegevens verliezen!");
+
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(ButtonType.NO, ButtonType.YES);
+    
+        //Deactivate Defaultbehavior for yes-Button:
+        Button yesButton = (Button) alert.getDialogPane().lookupButton( ButtonType.YES );
+        yesButton.setText("Hoofdmenu");
+        yesButton.setDefaultButton( false );
+    
+        //Activate Defaultbehavior for no-Button:
+        Button noButton = (Button) alert.getDialogPane().lookupButton( ButtonType.NO );
+        noButton.setText("Annuleren");
+        noButton.setDefaultButton( true );
+
+        if(alert.showAndWait().get() == ButtonType.YES){
+            URL url = Util.getPath("MainMenu");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            MainMenuController mmc = loader.getController();
+            mmc.setStage(stage);
+            mmc.render(root);
+        }
+
+        
+    }
 
     @FXML
     void verder(ActionEvent event) throws IOException {
-        addData();
-        URL url = Util.getPath("Insert2");
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-        Insert2Controller ic = loader.getController();
+        if(validateFields()){
+            addData();
+            URL url = Util.getPath("Insert2");
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            Insert2Controller ic = loader.getController();
+    
+            ic.setStage(stage);
+            ic.render(root);
+            ic.setDossier(dossier);
 
-        ic.setStage(stage);
-        ic.render(root);
-        ic.setDossier(dossier);
+        }
+        
     }
 
     @FXML
@@ -104,11 +147,38 @@ public class Insert1Controller implements Controller, Initializable {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
+
+            
+        stage.setOnCloseRequest(e -> {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Afsluiten");
+            alert.setHeaderText("U staat op het punt om af te sluiten!");
+            alert.setContentText("U zult ingevoerde gegevens verliezen!");
+
+            alert.getButtonTypes().clear();
+            alert.getButtonTypes().addAll(ButtonType.NO, ButtonType.YES);
+        
+            //Deactivate Defaultbehavior for yes-Button:
+            Button yesButton = (Button) alert.getDialogPane().lookupButton( ButtonType.YES );
+            yesButton.setText("Afsluiten");
+            yesButton.setDefaultButton( false );
+        
+            //Activate Defaultbehavior for no-Button:
+            Button noButton = (Button) alert.getDialogPane().lookupButton( ButtonType.NO );
+            noButton.setText("Annuleren");
+            noButton.setDefaultButton( true );
+
+            if(alert.showAndWait().get() != ButtonType.YES){
+                e.consume();
+            }
+        });
+
     }
 
 
     public void addData() throws IOException{
-        dossier.addAangifte();
+        if(this.newAangifte)
+            dossier.addAangifte();
 
         String[] data = new String[8];
 
@@ -127,31 +197,6 @@ public class Insert1Controller implements Controller, Initializable {
 
         System.out.println(dossier.getAangifte().getInfo());
 
-        /*
-        File file = new File("src/main/resources/org/zoz/data/aangifte.csv");
-        boolean fileExists = file.exists();
-        FileWriter writer = new FileWriter(file, true);
-        
-        if(!fileExists || file.length() == 0){
-            writer.write("Dossiernr;Mutatienr;Aangifte d.d.;District van PD;Straatnaam_plaatsdelict;Aangever-Voornamen/ACHTERNAAM;Aangever-Geboorteland;Aangever-Geboortedatum;Aangifte opgenomen door (verb)\n");
-        }
-
-
-
-
-
-        writer.write(field1.getText()+";"+
-                    field2.getValue().toString()+";"+
-                    field3.getText()+";"+
-                    field4.getText()+";"+ 
-                    field5.getText()+";"+
-                    field6.getSelectionModel().getSelectedItem()+";"+
-                    field7.getValue().toString()+";"+
-                    field8.getText()+"\n");
-        System.out.println("Data Saved succesfully!");
-        
-        writer.close();
-        */
     }
 
     private String getDate(DatePicker datePicker){
@@ -186,11 +231,90 @@ public class Insert1Controller implements Controller, Initializable {
         field8.setText("");
     }
 
+    private void loadData(){
+        if (this.dossier.getAangiftes().size() > 0){
+            String[] data = dossier.getAangifte().getInfo().split(";");
+            try {
+                field1.setText(data[0]);
+                field3.setText(data[2]);
+                field4.setText(data[3]);
+                field5.setText(data[4]);
+                field6.setValue(data[5]);
+                try {
+                    field2.setValue(LocalDate.parse(data[1]));
+                    field7.setValue(LocalDate.parse(data[6]));
+                } catch (Exception e) {
+                    System.out.println("Not all was filled while loading dates");
+                }
+                
+                field8.setText(data[7]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Not all was filled while loading fields"); 
+            }
+        }
+    }
+
+    private boolean validateFields() {
+        boolean isValid = true;
+    
+        // Validate field1 (TextField)
+        if (field1.getText().trim().isEmpty()) {
+            field1.setStyle("-fx-border-color: red;"); // Highlight the field if empty
+            isValid = false;
+        } else {
+            field1.setStyle(null);
+        }
+    
+        // Validate field2 (DatePicker)
+        if (field2.getValue() == null) {
+            field2.setStyle("-fx-border-color: red;");
+            isValid = false;
+        } else {
+            field2.setStyle(null);
+        }
+    
+        // Validate field3 (TextField)
+        if (field3.getText().trim().isEmpty()) {
+            field3.setStyle("-fx-border-color: red;");
+            isValid = false;
+        } else {
+            field3.setStyle(null);
+        }
+    
+        // Validate field4 (TextField)
+        if (field4.getText().trim().isEmpty()) {
+            field4.setStyle("-fx-border-color: red;");
+            isValid = false;
+        } else {
+            field4.setStyle(null);
+        }
+    
+        // Validate field5 (TextField)
+        if (field5.getText().trim().isEmpty()) {
+            field5.setStyle("-fx-border-color: red;");
+            isValid = false;
+        } else {
+            field5.setStyle(null);
+        }
+    
+        if (!isValid) {
+            System.out.println("Please fill in all required fields.");
+        }
+    
+        return isValid;
+    }
+
+
     public void setDossier(Dossier dossier){
         this.dossier = dossier;
+        this.loadData();
     }
     public Dossier getDossier(){
         return this.dossier;
+    }
+
+    public void newAangifte(boolean newAangifte){
+        this.newAangifte = newAangifte;
     }
 
     public String test(){
