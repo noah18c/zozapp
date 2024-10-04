@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
@@ -22,6 +23,7 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.zoz.dossier.Dossier;
 import org.zoz.dossier.Verdachte;
@@ -80,9 +82,12 @@ public class Util {
                 System.out.println("Workbook loaded successfully.");
             }
         } else {
-            System.out.println("Workbook is already loaded.");
+            excelFile.close();
+            try (FileInputStream fis = new FileInputStream(file)) {
+                excelFile = new XSSFWorkbook(fis);
+                System.out.println("Successfully switched workbook.");
+            }
         }
-
     }
 
     public static Workbook getExcel(){
@@ -111,30 +116,68 @@ public class Util {
         }
     }
 
-    public static double getBottomMostCellInFirstColumn() {
+    public static int getBottomMostNonEmptyRow(String sheetName) {
         // Access the sheet called "AANGIFTE"
-        Sheet sheet = excelFile.getSheet("AANGIFTE");
-
+        Sheet sheet = excelFile.getSheet(sheetName);
+    
         // Get the last row number (0-based index)
         int lastRowNum = sheet.getLastRowNum();
-        System.out.println("Number of rows: "+lastRowNum);
-
-        // Iterate from the last row upwards to find the last non-empty cell in the first column
+        
+        // Iterate from the last row upwards to find the last row that has meaningful data
         for (int rowIndex = lastRowNum; rowIndex >= 0; rowIndex--) {
             Row row = sheet.getRow(rowIndex);
-            if (row != null) {
-                Cell cell = row.getCell(0); // Get the first column (index 0)
-                if (cell != null && cell.getCellType() != CellType.BLANK) {
-
-                    //System.out.println(cell.getCellType());
-                    //System.out.println(cell.getStringCellValue());
-                    return cell.getNumericCellValue(); // Return the value of the first non-empty cell
-                }
+            if (row != null && row.getPhysicalNumberOfCells() > 0 && !isRowEmpty(row)) {
+                System.out.println("Current last row: " + rowIndex);
+                return rowIndex; // Return the index of the last non-empty row
             }
         }
 
-        return -1;
+        
+    
+    
+        return -1; // If no non-empty row is found
     }
+    
+    private static boolean isRowEmpty(Row row) {
+        // Check if every cell in this row is empty
+        for (int cellIndex = 0; cellIndex < row.getLastCellNum(); cellIndex++) {
+            Cell cell = row.getCell(cellIndex);
+            if (cell != null && !isCellEmpty(cell)) {
+                return false; // If any cell is not empty, the row is not empty
+            }
+        }
+        return true; // All cells are empty
+    }
+    
+    private static boolean isCellEmpty(Cell cell) {
+        switch (cell.getCellType()) {
+            case BLANK:
+                return true; // Cell is explicitly empty
+            case STRING:
+                return cell.getStringCellValue().trim().isEmpty(); // Empty or whitespace-only string value
+            case NUMERIC:
+                return false; // Numeric cells are considered non-empty if they hold a value
+            case BOOLEAN:
+                return false; // Boolean cells are non-empty if they hold a value
+            case FORMULA:
+                // Check the cached result of the formula to determine if it is effectively empty
+                switch (cell.getCachedFormulaResultType()) {
+                    case BLANK:
+                        return true;
+                    case STRING:
+                        return cell.getStringCellValue().trim().isEmpty();
+                    case NUMERIC:
+                    case BOOLEAN:
+                        return false; // A formula with a numeric or boolean result is not empty
+                    default:
+                        return true; // Treat anything else as empty
+                }
+            default:
+                return true; // Treat any other type as empty
+        }
+    }
+    
+    
 
     public static void setDossier(int dossierNum){
         Util.dossier = dossierNum;
@@ -210,7 +253,7 @@ public class Util {
         Sheet voortgangSheet = excelFile.getSheet("VOORTGANG");
 
         // load aangiftesheet data
-        int lastRow = aangifteSheet.getLastRowNum()+1;
+        int lastRow = getBottomMostNonEmptyRow("AANGIFTE")+1;
         aangifteSheet.createRow(lastRow);
         String[] data = dossier.getAangifte().getInfo().split(";");
         String mutatieNummer = data[0];
@@ -233,7 +276,7 @@ public class Util {
 
         // for every verdachte, create a row, use dossiernum that we already have, and copy the other stuff we want
         for (Verdachte verdachte:dossier.getAangifte().getVerdachtes()){
-            lastRow = verdachteSheet.getLastRowNum()+1;
+            lastRow = getBottomMostNonEmptyRow("VERDACHTE")+1;
             verdachteSheet.createRow(lastRow);
 
             data = verdachte.getInfo().split(";");
@@ -252,7 +295,7 @@ public class Util {
         }
 
         // write voortgang 1 and 2
-        lastRow = voortgangSheet.getLastRowNum()+1;
+        lastRow = getBottomMostNonEmptyRow("VOORTGANG")+1;
         voortgangSheet.createRow(lastRow);
 
         String dataString = dossier.getInfo1() +";"+ dossier.getInfo2();
@@ -318,9 +361,10 @@ public class Util {
     public static Dossier createNewDossier() {
         Dossier dossier = new Dossier();
 
-        double currentDossier = Util.getBottomMostCellInFirstColumn() + 1;
+        int currentDossier = Util.getBottomMostNonEmptyRow("AANGIFTE") + 1;
 
-        dossier.setId((int) currentDossier);
+
+        dossier.setId(currentDossier);
 
         return dossier;
 

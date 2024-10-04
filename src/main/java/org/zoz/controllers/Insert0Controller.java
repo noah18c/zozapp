@@ -122,6 +122,9 @@ public class Insert0Controller implements Controller, Initializable {
 
     @Override
     public void render(Parent root) throws IOException{
+        if (Util.getExcel() != null) {
+            Util.getExcel().close();
+        }
         scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -133,6 +136,7 @@ public class Insert0Controller implements Controller, Initializable {
 
 
     public void saveData() throws IOException {
+        System.out.println("current path:"+field1.getText());
         Util.setExcel(field1.getText());
         if(dossier == null)
             dossier = Util.createNewDossier();

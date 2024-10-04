@@ -43,6 +43,9 @@ public class MainMenuController implements Controller{
 
     @Override
     public void render(Parent root) throws IOException {
+        if (Util.getExcel() != null) {
+            Util.getExcel().close();
+        }
         this.scene = new Scene(root);
 
         Image icon = new Image(getClass().getResourceAsStream("/org/zoz/images/Aruba_Police_Force_logo.png"));
