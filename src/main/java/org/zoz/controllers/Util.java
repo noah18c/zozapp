@@ -270,7 +270,6 @@ public class Util {
             } else {
                 aangifteSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]);
             }
-            System.out.println("cel: "+i);
         }
         
 
