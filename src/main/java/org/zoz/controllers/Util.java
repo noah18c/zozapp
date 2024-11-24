@@ -140,11 +140,18 @@ public class Util {
     
     private static boolean isRowEmpty(Row row) {
         // Check if every cell in this row is empty
+        /*
         for (int cellIndex = 0; cellIndex < row.getLastCellNum(); cellIndex++) {
             Cell cell = row.getCell(cellIndex);
             if (cell != null && !isCellEmpty(cell)) {
                 return false; // If any cell is not empty, the row is not empty
             }
+        }
+            */
+
+        Cell cell = row.getCell(0);
+        if (cell != null && !isCellEmpty(cell)) {
+            return false; // If any cell is not empty, the row is not empty
         }
         return true; // All cells are empty
     }
@@ -186,35 +193,40 @@ public class Util {
         return Util.dossier;
     }
 
-    public static void loadCountries(){
-        
+    public static void loadCountries() {
         countries = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/countries.csv"), "UTF-8"))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                Util.class.getResourceAsStream("/org/zoz/data/countries.csv"), "UTF-8"))) {
             String line;
             // Skip the header
-            br.readLine(); 
+            br.readLine();
             while ((line = br.readLine()) != null) {
                 countries.add(line.trim());
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("File not found: /org/zoz/data/countries.csv");
         }
     }
 
-    
-    public static void loadIC(){
+    public static void loadIC() {
         ic = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/org/zoz/data/incidentcodes_2024.csv"), "UTF-8"))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                Util.class.getResourceAsStream("/org/zoz/data/incidentcodes_2024.csv"), "UTF-8"))) {
             String line;
             // Skip the header
-            br.readLine(); 
+            br.readLine();
             while ((line = br.readLine()) != null) {
                 ic.add(line.trim());
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("File not found: /org/zoz/data/incidentcodes_2024.csv");
         }
     }
+
 
     public static ArrayList<String> getCountries(){
         return Util.countries;
@@ -361,8 +373,18 @@ public class Util {
     public static Dossier createNewDossier() {
         Dossier dossier = new Dossier();
 
-        int currentDossier = Util.getBottomMostNonEmptyRow("AANGIFTE") + 1;
+        int lastRow = Util.getBottomMostNonEmptyRow("AANGIFTE");
 
+        int laatsteDossierNum = 0;
+
+        try{
+            laatsteDossierNum = (int) excelFile.getSheet("AANGIFTE").getRow(lastRow).getCell(0).getNumericCellValue();
+
+        } catch (IllegalStateException e){
+            System.out.println("Bestand is leeg, initializeren met dossiernummer 1.");
+        }
+        
+        int currentDossier = laatsteDossierNum + 1;
 
         dossier.setId(currentDossier);
 

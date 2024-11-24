@@ -221,11 +221,13 @@ public class Insert2Controller implements Controller, Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         field1.getItems().addAll(Util.getIC());
         field1.setValue(Util.getIC().get(0));
+        field1.setEditable(false);
 
         String[] feitfases = {"Voltooid feit", "Poging", "Voorbereiding",""};
 
         field11.getItems().addAll(feitfases);
         field11.setValue(feitfases[3]);
+        field11.setEditable(false);
 
 
 
@@ -240,6 +242,7 @@ public class Insert2Controller implements Controller, Initializable {
 
         field6.getItems().addAll(tabh);
         field6.setValue(tabh[4]);
+        field6.setEditable(false);
         
     }
 
@@ -253,6 +256,15 @@ public class Insert2Controller implements Controller, Initializable {
         } else {
             field1.setStyle(null);
         }
+
+        // Validate field1 (ComboBox)
+        if (field11.getSelectionModel().isEmpty()) {
+            field11.setStyle("-fx-border-color: red;"); // Highlight the field if empty
+            isValid = false;
+        } else {
+            field11.setStyle(null);
+        }
+    
     
         // Validate lijst (ListView)
         if (lijst.getItems().isEmpty()) {

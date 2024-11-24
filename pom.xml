@@ -8,7 +8,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <javafx.version>19</javafx.version> <!-- Define JavaFX version here -->
+        <javafx.version>23</javafx.version> <!-- Define JavaFX version here -->
     </properties>
 
     <dependencies>
@@ -54,12 +54,24 @@
                     <release>11</release>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                    <manifest>
+                        <mainClass>fully.qualified.MainClass</mainClass>
+                    </manifest>
+                    </archive>
+                    <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
 
             <!-- Maven Shade Plugin for creating a fat JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -67,24 +79,35 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.zoz.SuperApp</mainClass>
+                                    <mainClass>org.zoz.SuperApp</mainClass> <!-- Your fully qualified main class -->
                                 </transformer>
                             </transformers>
-                            <!-- Exclude module-info.class files -->
+                            <!-- Use relocation to ensure no module-info.class file is included -->
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
-                                        <exclude>META-INF/versions/9/module-info.class</exclude>
+                                        <exclude>META-INF/versions/*/module-info.class</exclude>
+                                        <exclude>module-info.class</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
+                            <!-- Relocate module-info files to avoid issues -->
+                            <relocations>
+                                <relocation>
+                                    <pattern>module-info</pattern>
+                                    <shadedPattern>hidden.module-info</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+
 
             <!-- JavaFX Maven Plugin for running JavaFX applications -->
             <plugin>

@@ -151,7 +151,7 @@ public class Insert0Controller implements Controller, Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        field1.setText("D:\\Users\\noahc\\Documenten\\Werk\\Papa\\ZOZ V24.12 (huidig versie in gebruik).xlsm");
+        field1.setText("C:\\Users\\");
     }
 
 }

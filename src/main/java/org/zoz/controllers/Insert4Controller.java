@@ -269,7 +269,7 @@ public class Insert4Controller implements Controller, Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-
+        field5.setPromptText("dd-mm-jjjj");
     }
 
     public void setDossier(Dossier dossier){
