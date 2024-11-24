@@ -115,7 +115,7 @@ public class Insert4Controller implements Controller, Initializable {
                     case "button1":
                         System.out.println("Nieuw aangifte!");
                         saveData();
-                        url = Util.getPath("Insert1");
+                        url = Util.getPath("Insert1Aangifte");
                         loader = new FXMLLoader(url);
                         root = loader.load();
                         ic = loader.getController();
@@ -130,7 +130,7 @@ public class Insert4Controller implements Controller, Initializable {
                         System.out.println("Nieuw dossier!");
                         saveData();
         
-                        url = Util.getPath("Insert1");
+                        url = Util.getPath("Insert1Aangfite");
                         loader = new FXMLLoader(url);
                         root = loader.load();
                         ic = loader.getController();
@@ -224,7 +224,7 @@ public class Insert4Controller implements Controller, Initializable {
     @FXML
     void terug(ActionEvent event) throws IOException {
         addData();
-        URL url = Util.getPath("Insert3");
+        URL url = Util.getPath("Insert3Voortgang");
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
         Insert3Controller ic = loader.getController();

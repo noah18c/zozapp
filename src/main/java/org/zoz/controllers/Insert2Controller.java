@@ -2,6 +2,7 @@ package org.zoz.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -177,7 +178,7 @@ public class Insert2Controller implements Controller, Initializable {
     @FXML
     void verder(ActionEvent event) throws IOException {
         if(validateFields()){
-            URL url = Util.getPath("Insert3");
+            URL url = Util.getPath("Insert3Voortgang");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Insert3Controller ic = loader.getController();
@@ -191,8 +192,7 @@ public class Insert2Controller implements Controller, Initializable {
 
     @FXML
     void terug(ActionEvent event) throws IOException {
-        System.out.println(this.dossier.getAangifte().getVerdachtes().size());
-        URL url = Util.getPath("Insert1");
+        URL url = Util.getPath("Insert1Aangifte");
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
         Insert1Controller ic = loader.getController();
@@ -297,7 +297,12 @@ public class Insert2Controller implements Controller, Initializable {
 
             String[] data = this.dossier.getAangifte().getVerdachte().getInfo().split(";");
             try {
-                field1.setValue(data[0]);
+                if (data[0] == "" && lijst.getItems().isEmpty()){
+                    field1.setValue(data[0]);
+                } else {
+                    field1.setValue(Util.getIC().get(0));
+                }
+                
                 field2.setText(data[1]);
                 field3.setText(data[2]);
                 field4.setValue(data[3]);

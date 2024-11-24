@@ -277,12 +277,11 @@ public class Util {
 
         // iterate over all data, create a cell, insert it into the cell
         for (int i = 0; i<data.length; i++){
-            if(i == 1){
+            if(i == 1 || i == 6){
                 insertDate(aangifteSheet, data[i], i+1, lastRow);
             } else {
                 aangifteSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]);
             }
-            System.out.println("cel: "+i);
         }
         
 
@@ -298,7 +297,8 @@ public class Util {
             verdachteSheet.getRow(lastRow).createCell(1).setCellValue(mutatieNummer);
             insertDate(verdachteSheet, aangifteDatum, 2, lastRow);
             for(int j = 0; j<data.length;j++){
-                if (j==6){
+                if (j==6 || j==8 || j==9 || j==10){
+                    System.out.println("Welke data is dit? "+data[j]);
                     insertDate(verdachteSheet, data[j], j+3, lastRow);
                 } else {
                     verdachteSheet.getRow(lastRow).createCell(j+3).setCellValue(data[j]); 
@@ -329,12 +329,12 @@ public class Util {
 
             // for voortgang #1
             if(i < 12){
-                System.out.println("string date: "+data[i]);
+                //System.out.println("string date: "+data[i]);
                 insertDate(voortgangSheet, data[i], i+1, lastRow);
             } else if(i<13) {
                 voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]); 
             } else if(i == 16){
-                System.out.println("string date: "+data[i]);
+                //System.out.println("string date: "+data[i]);
                 insertDate(voortgangSheet, data[i], i+3, lastRow);   
             } else {
                 // rest van voortgang #2

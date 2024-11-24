@@ -76,6 +76,39 @@ public class Insert3Controller implements Controller, Initializable {
     private Label status;
 
     @FXML
+    private Label status1;
+
+    @FXML
+    private Label status10;
+
+    @FXML
+    private Label status11;
+
+    @FXML
+    private Label status2;
+
+    @FXML
+    private Label status3;
+
+    @FXML
+    private Label status4;
+
+    @FXML
+    private Label status5;
+
+    @FXML
+    private Label status6;
+
+    @FXML
+    private Label status7;
+
+    @FXML
+    private Label status8;
+
+    @FXML
+    private Label status9;
+
+    @FXML
     private Button terugButton;
 
     @FXML
@@ -121,7 +154,7 @@ public class Insert3Controller implements Controller, Initializable {
     void verder(ActionEvent event) throws IOException {
         if(validateFields()){
             addData();
-            URL url = Util.getPath("Insert4");
+            URL url = Util.getPath("Insert4Voortgang");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Insert4Controller ic = loader.getController();
@@ -135,7 +168,7 @@ public class Insert3Controller implements Controller, Initializable {
     @FXML
     void terug(ActionEvent event) throws IOException {
         addData();
-        URL url = Util.getPath("Insert2");
+        URL url = Util.getPath("Insert2Verdachte");
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
         Insert2Controller ic = loader.getController();
@@ -215,6 +248,12 @@ public class Insert3Controller implements Controller, Initializable {
         field10.setPromptText("dd-mm-jjjj");
         field11.setPromptText("dd-mm-jjjj");
         field12.setPromptText("dd-mm-jjjj");
+
+        // Add listeners to all DatePicker fields
+        addListenersToFields();
+
+        // Initialize the status
+        updateStatus();
     }
 
 
@@ -310,6 +349,53 @@ public class Insert3Controller implements Controller, Initializable {
         }
     }
     
+
+    private void addListenersToFields() {
+        // Add change listeners to all DatePicker fields
+        addChangeListener(field2, 2);
+        addChangeListener(field3, 3);
+        addChangeListener(field4, 4);
+        addChangeListener(field5, 5);
+        addChangeListener(field6, 6);
+        addChangeListener(field7, 7);
+        addChangeListener(field8, 8);
+        addChangeListener(field9, 9);
+        addChangeListener(field10, 10);
+        addChangeListener(field11, 11);
+        addChangeListener(field12, 12);
+    }
+    
+    private void addChangeListener(DatePicker field, int fieldNumber) {
+        field.valueProperty().addListener((observable, oldValue, newValue) -> {
+            updateStatus(); // Update status whenever a field's value changes
+        });
+    }
+
+    private void updateStatus() {
+        String statusValue = "";
+    
+        // Check each field in order, starting from field2 to field12
+        if (!getDate(field2).isEmpty()) statusValue = status1.getText();
+        if (!getDate(field3).isEmpty()) statusValue = status2.getText();
+        if (!getDate(field4).isEmpty()) statusValue = status3.getText();
+        if (!getDate(field5).isEmpty()) statusValue = status4.getText();
+        if (!getDate(field6).isEmpty()) statusValue = status5.getText();
+        if (!getDate(field7).isEmpty()) statusValue = status6.getText();
+        if (!getDate(field8).isEmpty()) statusValue = status7.getText();
+        if (!getDate(field9).isEmpty()) statusValue = status8.getText();
+        if (!getDate(field10).isEmpty()) statusValue = status9.getText();
+        if (!getDate(field11).isEmpty()) statusValue = status10.getText();
+        if (!getDate(field12).isEmpty()) statusValue = status11.getText();
+
+        statusValue = statusValue.replaceFirst(":$", "");
+
+    
+        // Set the status label to the highest field number
+        status.setText("Huidige status: "+statusValue);
+    }
+    
+    
+
 
     public Dossier getDossier(){
         return this.dossier;

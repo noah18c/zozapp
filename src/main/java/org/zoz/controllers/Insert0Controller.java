@@ -91,7 +91,7 @@ public class Insert0Controller implements Controller, Initializable {
         try{
             saveData();
 
-            URL url = Util.getPath("Insert1");
+            URL url = Util.getPath("Insert1Aangifte");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Insert1Controller ic = loader.getController();
@@ -151,7 +151,8 @@ public class Insert0Controller implements Controller, Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        field1.setText("C:\\Users\\");
+        //field1.setText("C:\\Users\\");
+        field1.setText("D:\\Users\\noahc\\Documenten\\Werk\\Papa\\ZOZ APP 2024 PRESENTATIE BESTAND.xlsx");
     }
 
 }

@@ -116,7 +116,7 @@ public class Insert1Controller implements Controller, Initializable {
     void verder(ActionEvent event) throws IOException {
         if(validateFields()){
             addData();
-            URL url = Util.getPath("Insert2");
+            URL url = Util.getPath("Insert2Verdachte");
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Insert2Controller ic = loader.getController();
@@ -183,7 +183,7 @@ public class Insert1Controller implements Controller, Initializable {
         String[] data = new String[8];
 
         data[0] = field1.getText();
-        data[1] = field2.getValue().toString();
+        data[1] = getDate(field2);
         data[2] = field3.getText();
         data[3] = field4.getText();
         data[4] = field5.getText();
@@ -203,6 +203,7 @@ public class Insert1Controller implements Controller, Initializable {
         if (datePicker.getValue() == null){
             return "";
         } else {
+            System.out.println(datePicker.getValue().toString());
             return datePicker.getValue().toString();
         }
     }
@@ -242,10 +243,16 @@ public class Insert1Controller implements Controller, Initializable {
                 field6.setValue(data[5]);
                 try {
                     field2.setValue(LocalDate.parse(data[1]));
+                } catch (Exception e) {
+                    System.out.println("Not all was filled while loading dates");
+                }
+
+                try {
                     field7.setValue(LocalDate.parse(data[6]));
                 } catch (Exception e) {
                     System.out.println("Not all was filled while loading dates");
                 }
+                
                 
                 field8.setText(data[7]);
             } catch (ArrayIndexOutOfBoundsException e) {

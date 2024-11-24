@@ -49,17 +49,17 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Ontvangen:" />
-                  <Label layoutX="10.0" layoutY="69.0" text="In voorbereiding:" GridPane.rowIndex="1" />
-                  <Label layoutX="10.0" layoutY="113.0" text="Ter screening:" GridPane.rowIndex="2" />
-                  <Label layoutX="10.0" layoutY="157.0" text="Ingescreend:" wrapText="true" GridPane.rowIndex="3" />
-                  <Label layoutX="10.0" layoutY="201.0" text="Ter wederscreening:" GridPane.rowIndex="4" />
-                  <Label layoutX="10.0" layoutY="194.0" text="Uitgescreend:" GridPane.rowIndex="5" />
-                  <Label layoutX="10.0" layoutY="245.0" text="Uitgeboekt:" GridPane.rowIndex="6" />
-                  <Label layoutX="10.0" layoutY="289.0" text="Geparkeerd:" GridPane.rowIndex="7" />
-                  <Label layoutX="10.0" layoutY="316.0" text="In behandeling:" GridPane.rowIndex="8" />
-                  <Label layoutX="10.0" layoutY="358.0" text="Ter correctie:" GridPane.rowIndex="9" />
-                  <Label layoutX="10.0" layoutY="400.0" text="Afgehandeld:" GridPane.rowIndex="10" />
+                  <Label fx:id="status1" text="Ontvangen:" />
+                  <Label fx:id="status2" layoutX="10.0" layoutY="69.0" text="In voorbereiding:" GridPane.rowIndex="1" />
+                  <Label fx:id="status3" layoutX="10.0" layoutY="113.0" text="Ter screening:" GridPane.rowIndex="2" />
+                  <Label fx:id="status4" layoutX="10.0" layoutY="157.0" text="Ingescreend:" wrapText="true" GridPane.rowIndex="3" />
+                  <Label fx:id="status5" layoutX="10.0" layoutY="201.0" text="Ter wederscreening:" GridPane.rowIndex="4" />
+                  <Label fx:id="status6" layoutX="10.0" layoutY="194.0" text="Uitgescreend:" GridPane.rowIndex="5" />
+                  <Label fx:id="status7" layoutX="10.0" layoutY="245.0" text="Uitgeboekt:" GridPane.rowIndex="6" />
+                  <Label fx:id="status8" layoutX="10.0" layoutY="289.0" text="Geparkeerd:" GridPane.rowIndex="7" />
+                  <Label fx:id="status9" layoutX="10.0" layoutY="316.0" text="In behandeling:" GridPane.rowIndex="8" />
+                  <Label fx:id="status10" layoutX="10.0" layoutY="358.0" text="Ter correctie:" GridPane.rowIndex="9" />
+                  <Label fx:id="status11" layoutX="10.0" layoutY="400.0" text="Afgehandeld:" GridPane.rowIndex="10" />
                   <DatePicker fx:id="field2" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="1" />
                   <DatePicker fx:id="field3" layoutX="216.0" layoutY="269.0" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <DatePicker fx:id="field4" layoutX="216.0" layoutY="101.0" prefHeight="25.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
