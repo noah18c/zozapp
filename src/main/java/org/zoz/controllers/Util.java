@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.prefs.Preferences;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.commons.codec.binary.StringUtils;
@@ -41,6 +42,7 @@ public class Util {
     private static int dossier;
     private static ArrayList<String> countries,ic;
     private static ObservableList<String> lijst;
+    private static final String LAST_FILE_KEY = "lastFile";
 
     public static Parent loadFMXL(String fxml) throws IOException{
         URL url = Util.class.getResource("/org/zoz/fxml/"+fxml+".fxml");
@@ -61,6 +63,28 @@ public class Util {
 
     public static Parent getParent(FXMLLoader loader) throws IOException{
         return loader.load();
+    }
+
+    // Save the last file path to preferences
+    public static void saveLastFile(String filePath) {
+        Preferences prefs = Preferences.userNodeForPackage(Util.class);
+        prefs.put(LAST_FILE_KEY, filePath);
+    }
+
+    // Retrieve the last file path, defaulting to an empty string
+    public static String getLastFile() {
+        Preferences prefs = Preferences.userNodeForPackage(Util.class);
+        return prefs.get(LAST_FILE_KEY, ""); // Default to an empty string if not set
+    }
+
+    // Get the directory of the last file
+    public static String getLastDirectory() {
+        String lastFile = getLastFile();
+        if (lastFile != null && !lastFile.isEmpty()) {
+            File file = new File(lastFile);
+            return file.getParent(); // Extract the parent directory
+        }
+        return System.getProperty("user.home"); // Default to user home if no file is saved
     }
 
     public static String getStyle(String styleSheet) {
@@ -390,5 +414,9 @@ public class Util {
 
         return dossier;
 
+    }
+
+    public static boolean isValidFormat(String date) {
+        return date.matches("\\d{4}-\\d{2}-\\d{2}");
     }
 }

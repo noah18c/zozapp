@@ -394,9 +394,6 @@ public class Insert3Controller implements Controller, Initializable {
         status.setText("Huidige status: "+statusValue);
     }
     
-    
-
-
     public Dossier getDossier(){
         return this.dossier;
     }

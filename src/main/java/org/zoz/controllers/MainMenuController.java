@@ -58,7 +58,7 @@ public class MainMenuController implements Controller{
 
         stage.setScene(scene);
         stage.centerOnScreen();
-        stage.setTitle("ZOZ - free trial");
+        stage.setTitle("ZOZ - free trial v1.2");
         stage.show();
 
         stage.setOnCloseRequest(e->{

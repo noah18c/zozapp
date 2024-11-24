@@ -261,6 +261,8 @@ public class Insert1Controller implements Controller, Initializable {
         }
     }
 
+
+
     private boolean validateFields() {
         boolean isValid = true;
     
@@ -306,7 +308,7 @@ public class Insert1Controller implements Controller, Initializable {
     
         if (!isValid) {
             System.out.println("Please fill in all required fields.");
-        }
+        } 
     
         return isValid;
     }

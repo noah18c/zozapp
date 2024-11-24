@@ -29,7 +29,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Pad naar Excell-bestand:" wrapText="true" />
+                  <Label text="Pad naar Excel-bestand:" wrapText="true" />
                   <HBox alignment="CENTER" prefHeight="48.0" prefWidth="380.0" GridPane.columnIndex="1">
                      <children>
                         <TextField fx:id="field1" prefHeight="30.0" prefWidth="330.0" />

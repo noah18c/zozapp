@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 import org.zoz.dossier.Dossier;
 
@@ -54,7 +55,9 @@ public class Insert0Controller implements Controller, Initializable {
     void chooseFile(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Kies ZOZ-excell bestand");
-        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        String lastDir = Util.getLastDirectory();
+        fc.setInitialDirectory(new File(lastDir));
 
         //.Show the file chooser dialog
         Stage stage = (Stage) fileChooser.getScene().getWindow(); // Get the current stage
@@ -63,6 +66,8 @@ public class Insert0Controller implements Controller, Initializable {
         // If a file was selected, set its path to the text field
         if (selectedFile != null) {
             field1.setText(selectedFile.getAbsolutePath());
+
+            Util.saveLastFile(selectedFile.getAbsolutePath());
         } else {
             field1.setText("No file selected");
         }
@@ -134,7 +139,6 @@ public class Insert0Controller implements Controller, Initializable {
         });
     }
 
-
     public void saveData() throws IOException {
         System.out.println("current path:"+field1.getText());
         Util.setExcel(field1.getText());
@@ -151,8 +155,15 @@ public class Insert0Controller implements Controller, Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        //field1.setText("C:\\Users\\");
-        field1.setText("D:\\Users\\noahc\\Documenten\\Werk\\Papa\\ZOZ APP 2024 PRESENTATIE BESTAND.xlsx");
+         // Retrieve the last saved directory
+        String lastDir =  Util.getLastFile();
+        
+        // Set the text field to the last directory or a default message
+        if (lastDir != null && !lastDir.isEmpty()) {
+            field1.setText(lastDir); // Display the last directory
+        } else {
+            field1.setText("No directory selected. Choose a file to start.");
+        }
     }
 
 }
