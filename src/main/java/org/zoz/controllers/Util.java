@@ -341,6 +341,10 @@ public class Util {
         System.out.println(dataString);
 
         voortgangSheet.getRow(lastRow).createCell(0).setCellValue(dossier.getId());
+        voortgangSheet.getRow(lastRow).createCell(1).setCellValue(mutatieNummer);
+        insertDate(voortgangSheet, aangifteDatum, 2, lastRow);
+
+        int shiftRight = 3; // as a result of above, shift other cells 3 to right
 
         int lre = lastRow+1;
 
@@ -349,20 +353,22 @@ public class Util {
 
 
         System.out.println(Arrays.toString(data));
+
+        
         for (int i = 0; i<data.length;i++){
 
             // for voortgang #1
             if(i < 12){
                 //System.out.println("string date: "+data[i]);
-                insertDate(voortgangSheet, data[i], i+1, lastRow);
+                insertDate(voortgangSheet, data[i], i+shiftRight, lastRow);
             } else if(i<13) {
-                voortgangSheet.getRow(lastRow).createCell(i+1).setCellValue(data[i]); 
+                voortgangSheet.getRow(lastRow).createCell(i+shiftRight).setCellValue(data[i]); 
             } else if(i == 16){
                 //System.out.println("string date: "+data[i]);
-                insertDate(voortgangSheet, data[i], i+3, lastRow);   
+                insertDate(voortgangSheet, data[i], i+shiftRight+2, lastRow);   
             } else {
                 // rest van voortgang #2
-                voortgangSheet.getRow(lastRow).createCell(i+3).setCellValue(data[i]); 
+                voortgangSheet.getRow(lastRow).createCell(i+shiftRight+2).setCellValue(data[i]); 
             }
             
 

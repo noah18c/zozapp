@@ -180,19 +180,17 @@ public class Insert1Controller implements Controller, Initializable {
         if(this.newAangifte)
             dossier.addAangifte();
 
-        String[] data = new String[8];
-
-        data[0] = field1.getText();
-        data[1] = getDate(field2);
-        data[2] = field3.getText();
-        data[3] = field4.getText();
-        data[4] = field5.getText();
-        data[5] = field6.getSelectionModel().getSelectedItem();
-        data[6] = getDate(field7);
-        data[7] = field8.getText();
+        ArrayList<String> data = new ArrayList<>();
+        data.add(field1.getText());
+        data.add(getDate(field2));
+        data.add(field3.getText());
+        data.add(field4.getText());
+        data.add(field5.getText());
+        data.add(field6.getSelectionModel().getSelectedItem());
+        data.add(getDate(field7));
+        data.add(field8.getText());
 
         String fullData = String.join(";", data);
-
         dossier.getAangifte().setInfo(fullData);
 
         System.out.println(dossier.getAangifte().getInfo());
